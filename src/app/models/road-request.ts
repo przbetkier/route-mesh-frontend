@@ -8,6 +8,7 @@ export class RoadRequest {
               public kmRange: number[],
               public lines: number,
               public maxAxleLoad: number,
-              public admins: number[]) {
+              public admins: number[],
+              public width: number) {
   }
 }
