@@ -13,6 +13,7 @@ export class Road {
               public lines: number,
               public maxAxleLoad: number,
               public trafficFactor: number,
+              public width: number,
               public admins: SimpleAdmin[]) {
   }
 }

@@ -26,7 +26,6 @@ export class RoadsComponent implements OnInit {
   admins: Admin[] = [];
   filteredStartNodes: Observable<Node[]>;
   filteredEndNodes: Observable<Node[]>;
-  isSearching = false;
 
   constructor(private formBuilder: FormBuilder,
               private roadService: RoadsService,
@@ -46,6 +45,7 @@ export class RoadsComponent implements OnInit {
       maxAxleLoad: ['', Validators.required],
       kmStart: ['', Validators.required],
       kmEnd: ['', Validators.required],
+      width: ['', Validators.required]
     });
     this.getRoads();
     this.getNodes();
@@ -102,6 +102,10 @@ export class RoadsComponent implements OnInit {
     return this.formGroup.get('kmEnd');
   }
 
+  get width() {
+    return this.formGroup.get('width');
+  }
+
   getRoads() {
     return this.roadService.getRoads().subscribe(roads => {
       this.roads = roads;
@@ -142,7 +146,8 @@ export class RoadsComponent implements OnInit {
         [Number(this.kmStart.value), Number(this.kmEnd.value)],
         this.lines.value,
         this.maxAxleLoad.value,
-        this.selectedAdmins.value.map(n => Number(n))
+        this.selectedAdmins.value.map(n => Number(n)),
+        Number(this.width.value)
       );
 
       console.log(roadRequest);
