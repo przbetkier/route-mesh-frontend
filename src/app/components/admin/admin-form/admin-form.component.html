@@ -1,0 +1,54 @@
+<mat-card>
+  <h2>Add new admin</h2>
+  <mat-card-content>
+    <div class="roads-form">
+      <form [formGroup]="formGroup" #formDirective="ngForm" (ngSubmit)="addAdmin(formDirective)">
+        <div class="form-container">
+          <div class="row">
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="name" required>
+                <mat-placeholder>Name:</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="address" required>
+                <mat-placeholder>Address:</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="postalCode" required>
+                <mat-placeholder>Postal code</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="telephone" required>
+                <mat-placeholder>Telephone</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="email">
+                <mat-placeholder>E-mail:</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput formControlName="fax">
+                <mat-placeholder>Fax:</mat-placeholder>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 button-section">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid() || processing">Add admin</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+  <mat-spinner [diameter]="50" *ngIf="processing"></mat-spinner>
+</mat-card>

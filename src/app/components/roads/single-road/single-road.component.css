@@ -1,0 +1,15 @@
+.mat-divider {
+  border-top-color: white;
+}
+
+.from-dest {
+  color: #1b4f6d;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.mat-expansion-panel-header-description {
+  text-align: right;
+  display: block;
+}
+

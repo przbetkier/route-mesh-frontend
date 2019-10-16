@@ -1,0 +1,37 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h6>{{road.name}} </h6>
+      </mat-panel-title>
+      <mat-panel-description>
+        From <span class="from-dest">{{road.startNode.name}}</span> to <span class="from-dest">{{road.endNode.name}}</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="row">
+      <div class="col-6">
+        <p><strong>Start:</strong> [{{road.startNode.latitude | number: '1.0-2'}}, {{road.startNode.longitude | number: '1.0-2'}}]</p>
+        <p><strong>Numbers:</strong> <app-road-number *ngFor="let number of road.numbers" [number]="number"></app-road-number></p>
+        <p><strong>Lines:</strong> {{road.lines}}</p>
+        <p><strong>Traffic factor: </strong> <span *ngIf="road.trafficFactor">{{road.trafficFactor}}</span><span *ngIf="!road.trafficFactor">UNKNOWN</span></p>
+      </div>
+      <div class="col-6">
+        <p><strong>End:</strong> [{{road.endNode.latitude | number: '1.0-2'}}, {{road.endNode.longitude | number: '1.0-2'}}]</p>
+        <p><strong>Type:</strong> {{road.type}}</p>
+        <p><strong>KM range:</strong> {{road.kmRange}}</p>
+        <p><strong>Max axle load:</strong> {{road.maxAxleLoad}}</p>
+      </div>
+      <div class="col-6" *ngIf="road.admins && road.admins.length > 0">
+          <h6>Managed By:</h6>
+        <ul>
+          <li *ngFor="let admin of road.admins">{{admin.name}}</li>
+        </ul>
+      </div>
+      <div class="col-12">
+        <button mat-raised-button color="warn" (click)="deleteRoad(road.id)">Delete road
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
