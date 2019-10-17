@@ -11,14 +11,14 @@
 
     <div class="row">
       <div class="col-6">
-        <p><strong>Start:</strong> [{{road.startNode.latitude | number: '1.0-2'}}, {{road.startNode.longitude | number: '1.0-2'}}]</p>
+        <p><strong>Start:</strong> [{{road.startNode.latitude | number: '1.0-5'}}, {{road.startNode.longitude | number: '1.0-5'}}]</p>
         <p><strong>Numbers:</strong> <app-road-number *ngFor="let number of road.numbers" [number]="number"></app-road-number></p>
         <p><strong>Lines:</strong> {{road.lines}}</p>
         <p *ngIf="road.width"><strong>Width:</strong> {{road.width}} [mm]</p>
         <p><strong>Traffic factor: </strong> <span *ngIf="road.trafficFactor">{{road.trafficFactor}}</span><span *ngIf="!road.trafficFactor">UNKNOWN</span></p>
       </div>
       <div class="col-6">
-        <p><strong>End:</strong> [{{road.endNode.latitude | number: '1.0-2'}}, {{road.endNode.longitude | number: '1.0-2'}}]</p>
+        <p><strong>End:</strong> [{{road.endNode.latitude | number: '1.0-5'}}, {{road.endNode.longitude | number: '1.0-5'}}]</p>
         <p><strong>Type:</strong> {{road.type}}</p>
         <p><strong>KM range:</strong> {{road.kmRange}}</p>
         <p><strong>Max axle load:</strong> {{road.maxAxleLoad}} [kN]</p>
