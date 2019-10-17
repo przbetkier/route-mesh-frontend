@@ -50,16 +50,6 @@ export class RoadsComponent implements OnInit {
     this.getRoads();
     this.getNodes();
     this.getAdmins();
-
-    this.filteredStartNodes = this.formGroup.get('start').valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
-
-    this.filteredEndNodes = this.formGroup.get('end').valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
   }
 
   get name() {
@@ -116,6 +106,8 @@ export class RoadsComponent implements OnInit {
   getNodes() {
     return this.nodeService.getNodes().subscribe(nodes => {
       this.nodes = nodes;
+      this.filteredStartNodes = this.filteredStartNodesObs();
+      this.filteredEndNodes = this.filteredEndNodesObs();
     });
   }
 
@@ -123,6 +115,19 @@ export class RoadsComponent implements OnInit {
     return this.adminService.getAdmins().subscribe(admins => {
       this.admins = admins;
     });
+  }
+
+  filteredStartNodesObs(): Observable<Node[]> {
+    return this.formGroup.get('start').valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value)));
+  }
+
+  filteredEndNodesObs(): Observable<Node[]> {
+    return this.formGroup.get('end').valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
   isFormValid(): boolean {
@@ -133,8 +138,8 @@ export class RoadsComponent implements OnInit {
     if (this.isFormValid()) {
       this.processing = true;
 
-      const startId = this._filter(this.start.value)[0].id;
-      const endId = this._filter(this.end.value)[0].id;
+      const startId = this.nodes.filter(n => n.name === this.start.value)[0].id;
+      const endId = this.nodes.filter(n => n.name === this.end.value)[0].id;
 
       const roadRequest = new RoadRequest(
         this.name.value,
@@ -152,11 +157,12 @@ export class RoadsComponent implements OnInit {
 
       console.log(roadRequest);
       console.log(this.selectedAdmins.value);
-      formDirective.resetForm();
       this.roadService.postRoad(roadRequest).subscribe(road => {
         this.roads.unshift(road);
         this.formGroup.reset();
         formDirective.resetForm();
+        this.filteredStartNodes = this.filteredStartNodesObs();
+        this.filteredEndNodes = this.filteredEndNodesObs();
         this.processing = false;
       }, error => {
         this.processing = false;
