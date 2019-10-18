@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  APIEndpoint: 'http://localhost:8081'
+  APIEndpoint: 'http://localhost:8081',
+  GMAP_API_KEY: 'key'
 };
 
 /*

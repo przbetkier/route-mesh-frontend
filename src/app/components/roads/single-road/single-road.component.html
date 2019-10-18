@@ -1,11 +1,13 @@
-<mat-accordion>
+<mat-accordion (click)="showMap()">
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header [collapsedHeight]="'125px'" [expandedHeight]="'125px'">
       <mat-panel-title>
         <h6>{{road.name}} </h6>
+        From <span class="from-dest">{{road.startNode.name}}</span><br>
+        to <span class="from-dest">{{road.endNode.name}}</span>
       </mat-panel-title>
       <mat-panel-description>
-        From <span class="from-dest">{{road.startNode.name}}</span> to <span class="from-dest">{{road.endNode.name}}</span>
+
       </mat-panel-description>
     </mat-expansion-panel-header>
 
@@ -22,6 +24,7 @@
         <p><strong>Type:</strong> {{road.type}}</p>
         <p><strong>KM range:</strong> {{road.kmRange}}</p>
         <p><strong>Max axle load:</strong> {{road.maxAxleLoad}} [kN]</p>
+        <p><strong>Direction: </strong> <span *ngIf="road.roadDirection == 'ONE_WAY'">One way</span> <span *ngIf="road.roadDirection == 'TWO_WAY'">Two way</span></p>
       </div>
       <div class="col-6" *ngIf="road.admins && road.admins.length > 0">
           <h6>Managed By:</h6>
@@ -32,6 +35,12 @@
       <div class="col-12">
         <button mat-raised-button color="warn" (click)="deleteRoad(road.id)">Delete road
         </button>
+      </div>
+      <div *ngIf="shouldShowMap" class="col-12 map">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-direction [origin]="origin" [destination]="destination">
+          </agm-direction>
+        </agm-map>
       </div>
     </div>
   </mat-expansion-panel>

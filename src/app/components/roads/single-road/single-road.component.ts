@@ -9,15 +9,23 @@ import {RoadsService} from '../../../services/roads.service';
 })
 export class SingleRoadComponent implements OnInit {
 
+  public lat: number;
+  public lng: number;
+  public origin: any;
+  public destination: any;
+
   @Input()
   road: Road;
 
   @Output() onRoadRemove = new EventEmitter<number>();
 
+  shouldShowMap = false;
+
   constructor(private roadService: RoadsService) {
   }
 
   ngOnInit() {
+    this.getDirection();
   }
 
   deleteRoad(roadId: number) {
@@ -26,4 +34,12 @@ export class SingleRoadComponent implements OnInit {
     });
   }
 
+  showMap() {
+    this.shouldShowMap = true;
+  }
+
+  getDirection() {
+    this.origin = {lat: this.road.startNode.latitude, lng: this.road.startNode.longitude};
+    this.destination = {lat: this.road.endNode.latitude, lng: this.road.endNode.longitude};
+  }
 }

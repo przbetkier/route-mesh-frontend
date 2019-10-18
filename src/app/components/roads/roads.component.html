@@ -98,13 +98,23 @@
 
   <mat-card *ngIf="roads && roads.length > 0">
     <mat-card-content>
-      <h2>Roads:</h2>
-      <div class="roads-list" *ngFor="let road of roads">
+      <div class="row">
+        <div class="col-6"><h2>Roads ({{(filteredRoads | async)?.length}})</h2></div>
+        <div class="col-6">
+          <form [formGroup]="searchFormGroup">
+            <mat-form-field>
+            <input type="text" placeholder="Search for a road" matInput formControlName="searchInput">
+            </mat-form-field>
+          </form>
+        </div>
+      </div>
+
+      <div class="roads-list" *ngFor="let road of filteredRoads | async">
         <app-single-road [road]="road" (onRoadRemove)="reload($event)"></app-single-road>
       </div>
     </mat-card-content>
   </mat-card>
-  <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+  <mat-spinner class="main-spinner" *ngIf="loading" [diameter]="50"></mat-spinner>
   <mat-card *ngIf="!loading && (!roads || roads.length == 0)">
     <mat-card-content>
       <h2>There are no roads yet!</h2>
