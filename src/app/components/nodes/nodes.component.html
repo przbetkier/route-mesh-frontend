@@ -1,0 +1,14 @@
+<div class="container">
+  <mat-card>
+    <h2>Nodes ({{nodes.length}}):</h2>
+    <mat-card-content>
+      <div *ngIf="!loading" class="col-12 map">
+        <agm-map [latitude]="52.229676" [longitude]="21.012229">
+          <agm-marker *ngFor="let node of nodes" [latitude]="node.latitude" [longitude]="node.longitude">
+            <agm-info-window>{{node.name}}</agm-info-window>
+          </agm-marker>
+        </agm-map>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

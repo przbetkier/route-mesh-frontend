@@ -13,3 +13,21 @@
   display: block;
 }
 
+agm-map {
+  height: 300px;
+}
+
+.map {
+  margin-top: 2rem;
+}
+
+
+.mat-content {
+  display: block!important;
+  flex: 0;
+}
+
+.mat-expansion-panel-header-title {
+  display: block;
+  flex-grow: 2;
+}

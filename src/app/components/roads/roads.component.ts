@@ -18,10 +18,12 @@ import {map, startWith} from 'rxjs/operators';
 export class RoadsComponent implements OnInit {
 
   formGroup: FormGroup;
+  searchFormGroup: FormGroup;
   processing = false;
   selectedAdmins = new FormControl();
   loading = true;
   roads: Road[] = [];
+  filteredRoads: Observable<Road[]>;
   nodes: Node[] = [];
   admins: Admin[] = [];
   filteredStartNodes: Observable<Node[]>;
@@ -46,6 +48,10 @@ export class RoadsComponent implements OnInit {
       kmStart: ['', Validators.required],
       kmEnd: ['', Validators.required],
       width: ['', Validators.required]
+    });
+
+    this.searchFormGroup = this.formBuilder.group({
+      searchInput: ['', {}]
     });
     this.getRoads();
     this.getNodes();
@@ -100,6 +106,7 @@ export class RoadsComponent implements OnInit {
     return this.roadService.getRoads().subscribe(roads => {
       this.roads = roads;
       this.loading = false;
+      this.filteredRoads = this.filteredRoadsObs();
     });
   }
 
@@ -128,6 +135,12 @@ export class RoadsComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
+  }
+
+  filteredRoadsObs(): Observable<Road[]> {
+    return this.searchFormGroup.get('searchInput').valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterSearch(value)));
   }
 
   isFormValid(): boolean {
@@ -160,9 +173,11 @@ export class RoadsComponent implements OnInit {
       this.roadService.postRoad(roadRequest).subscribe(road => {
         this.roads.unshift(road);
         this.formGroup.reset();
+        this.searchFormGroup.reset();
         formDirective.resetForm();
         this.filteredStartNodes = this.filteredStartNodesObs();
         this.filteredEndNodes = this.filteredEndNodesObs();
+        this.filteredRoads = this.filteredRoadsObs();
         this.processing = false;
       }, error => {
         this.processing = false;
@@ -174,6 +189,11 @@ export class RoadsComponent implements OnInit {
   private _filter(value: string): Node[] {
     const filterValue = value.toLowerCase();
     return this.nodes.filter(node => node.name.toLowerCase().indexOf(filterValue) >= 0);
+  }
+
+  private _filterSearch(value: string): Road[] {
+    const filterValue = value.toLowerCase();
+    return this.roads.filter(road => road.name.toLowerCase().indexOf(filterValue) >= 0);
   }
 
   reload(removedId: number) {

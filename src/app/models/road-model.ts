@@ -6,7 +6,7 @@ export class Road {
               public name: string,
               public startNode: SimpleNode,
               public endNode: SimpleNode,
-              public direction: string,
+              public roadDirection: string,
               public type: string,
               public numbers: string[],
               public kmRange: number[],

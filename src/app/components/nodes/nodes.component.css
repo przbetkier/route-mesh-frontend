@@ -1,0 +1,17 @@
+agm-map {
+  height: 80vh;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+mat-card {
+  margin-top: 32px;
+  background-color: rgba(233, 231, 222, 0.4);
+  padding: 2rem;
+}
+
+h2 {
+  color: white;
+}

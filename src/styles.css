@@ -1,7 +1,8 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-  background-color: #596b80;
-  padding-bottom: 46px;
+  background-image: url("https://templated.co/items/demos/visualize/images/bg.jpg");
+  background-size: cover;
+  background-position: top center;
 }
 
