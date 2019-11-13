@@ -32,6 +32,14 @@ mat-card {
   padding: 8px;
 }
 
+.pagination {
+  padding: 8px;
+}
+
+mat-paginator {
+  width: 100%;
+}
+
 mat-form-field {
   width: 100%;
 }
