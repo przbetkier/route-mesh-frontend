@@ -17,6 +17,7 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
   MatStepperModule,
@@ -74,7 +75,8 @@ import {AppConfig} from './config/config';
     MatCheckboxModule,
     MatMenuModule,
     MatStepperModule,
-    MatDialogModule
+    MatDialogModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

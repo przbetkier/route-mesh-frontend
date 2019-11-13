@@ -9,6 +9,7 @@ import {Admin} from '../../models/admin-model';
 import {AdminService} from '../../services/admin.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import {PageEvent} from '@angular/material';
 
 @Component({
   selector: 'app-roads',
@@ -28,6 +29,13 @@ export class RoadsComponent implements OnInit {
   admins: Admin[] = [];
   filteredStartNodes: Observable<Node[]>;
   filteredEndNodes: Observable<Node[]>;
+
+  page = 0;
+  pageSize = 20;
+  length = 0;
+  pageSizeOptions: number[] = [20, 50, 100];
+
+  pageEvent: PageEvent;
 
   constructor(private formBuilder: FormBuilder,
               private roadService: RoadsService,
@@ -103,11 +111,19 @@ export class RoadsComponent implements OnInit {
   }
 
   getRoads() {
-    return this.roadService.getRoads().subscribe(roads => {
-      this.roads = roads;
+    return this.roadService.getRoads(this.page, this.pageSize).subscribe(roadsPage => {
+      this.roads = roadsPage.content;
+      this.page = roadsPage.pageable.pageNumber;
+      this.length = roadsPage.totalElements;
       this.loading = false;
       this.filteredRoads = this.filteredRoadsObs();
     });
+  }
+
+  getRoadsPage(e?: PageEvent) {
+    this.page = e.pageIndex;
+    this.pageSize = e.pageSize;
+    this.getRoads();
   }
 
   getNodes() {
@@ -168,8 +184,6 @@ export class RoadsComponent implements OnInit {
         Number(this.width.value)
       );
 
-      console.log(roadRequest);
-      console.log(this.selectedAdmins.value);
       this.roadService.postRoad(roadRequest).subscribe(road => {
         this.roads.unshift(road);
         this.formGroup.reset();

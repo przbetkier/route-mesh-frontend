@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Road} from '../models/road-model';
 import {RoadRequest} from '../models/road-request';
 import {AppConfig} from '../config/config';
+import {RoadsPage} from '../models/roads-page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class RoadsService {
   constructor(private http: HttpClient) {
   }
 
-  public getRoads(): Observable<Road[]> {
-    return this.http.get<Road[]>(`${AppConfig.API_ENDPOINT}/roads`);
+  public getRoads(page: number, pageSize: number): Observable<RoadsPage> {
+    return this.http.get<RoadsPage>(`${AppConfig.API_ENDPOINT}/roads?page=${page}&size=${pageSize}`);
   }
 
   public postRoad(roadRequest: RoadRequest): Observable<Road> {

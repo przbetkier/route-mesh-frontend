@@ -103,10 +103,18 @@
         <div class="col-6">
           <form [formGroup]="searchFormGroup">
             <mat-form-field>
-            <input type="text" placeholder="Search for a road" matInput formControlName="searchInput">
+              <input type="text" placeholder="Search for a road" matInput formControlName="searchInput">
             </mat-form-field>
           </form>
         </div>
+      </div>
+
+      <div class="pagination">
+        <mat-paginator [length]="length"
+                       [pageSize]="pageSize"
+                       (page)="pageEvent = getRoadsPage($event)"
+                       [pageSizeOptions]="pageSizeOptions">
+        </mat-paginator>
       </div>
 
       <div class="roads-list" *ngFor="let road of filteredRoads | async">
