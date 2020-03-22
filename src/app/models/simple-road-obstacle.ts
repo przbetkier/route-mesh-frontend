@@ -3,7 +3,8 @@ export class SimpleRoadObstacle {
               public name: string,
               public city: string,
               public comment: string,
-              public obstacleType: string,
+              public type: string,
+              public subtype: string,
               public immovable: boolean) {
   }
 }
