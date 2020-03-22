@@ -14,6 +14,10 @@ export class RoadsService {
   constructor(private http: HttpClient) {
   }
 
+  public getRoad(id: number): Observable<Road> {
+    return this.http.get<Road>(`${AppConfig.API_ENDPOINT}/roads/${id}`);
+  }
+
   public getRoads(page: number, pageSize: number): Observable<RoadsPage> {
     return this.http.get<RoadsPage>(`${AppConfig.API_ENDPOINT}/roads?page=${page}&size=${pageSize}`);
   }

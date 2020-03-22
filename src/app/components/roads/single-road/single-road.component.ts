@@ -1,6 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Road} from '../../../models/road-model';
 import {RoadsService} from '../../../services/roads.service';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {NewObstacleDialogComponent} from './obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
+import {ObstacleService} from '../../../services/obstacle.service';
 
 @Component({
   selector: 'app-single-road',
@@ -21,7 +24,8 @@ export class SingleRoadComponent implements OnInit {
 
   shouldShowMap = false;
 
-  constructor(private roadService: RoadsService) {
+  constructor(public dialog: MatDialog, private roadService: RoadsService, private obstacleService: ObstacleService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -34,12 +38,30 @@ export class SingleRoadComponent implements OnInit {
     });
   }
 
-  showMap() {
-    this.shouldShowMap = true;
+  changeShouldShowMap() {
+    this.shouldShowMap = !this.shouldShowMap;
   }
 
   getDirection() {
     this.origin = {lat: this.road.startNode.latitude, lng: this.road.startNode.longitude};
     this.destination = {lat: this.road.endNode.latitude, lng: this.road.endNode.longitude};
+  }
+
+  addNewObstacle() {
+    this.dialog.open(NewObstacleDialogComponent, {
+      width: '60vw',
+      data: {roadId: this.road.id, roadName: this.road.name},
+      panelClass: 'custom-modalbox'
+    });
+    this.dialog.afterAllClosed.subscribe(
+      () => {
+        this.reload();
+      }
+    );
+  }
+
+  reload() {
+    this.roadService.getRoad(this.road.id)
+      .subscribe(r => this.road = r);
   }
 }

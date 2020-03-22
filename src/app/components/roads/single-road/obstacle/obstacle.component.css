@@ -1,0 +1,12 @@
+.comment {
+  font-style: italic;
+  color: gray;
+}
+
+mat-list-item {
+  background-color: rgba(87, 87, 87, 0.26);
+}
+
+mat-icon {
+  cursor: pointer;
+}

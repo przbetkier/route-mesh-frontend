@@ -20,6 +20,7 @@ import {
   MatPaginatorModule,
   MatProgressSpinnerModule,
   MatSelectModule,
+  MatSnackBarModule,
   MatStepperModule,
   MatTabsModule,
   MatToolbarModule,
@@ -36,6 +37,8 @@ import {AgmCoreModule} from '@agm/core';
 import {AgmDirectionModule} from 'agm-direction';
 import {NodesComponent} from './components/nodes/nodes.component';
 import {AppConfig} from './config/config';
+import {ObstacleComponent} from './components/roads/single-road/obstacle/obstacle.component';
+import {NewObstacleDialogComponent} from './components/roads/single-road/obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import {AppConfig} from './config/config';
     RoadNumberComponent,
     AdminComponent,
     AdminFormComponent,
-    NodesComponent
+    NodesComponent,
+    ObstacleComponent,
+    NewObstacleDialogComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -76,10 +81,12 @@ import {AppConfig} from './config/config';
     MatMenuModule,
     MatStepperModule,
     MatDialogModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [NewObstacleDialogComponent]
 })
 export class AppModule {
 }

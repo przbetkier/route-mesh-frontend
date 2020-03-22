@@ -3,7 +3,7 @@
 }
 
 .from-dest {
-  color: #1b4f6d;
+  color: #24a2d6;
   margin-left: 8px;
   margin-right: 8px;
 }
@@ -31,3 +31,14 @@ agm-map {
   display: block;
   flex-grow: 2;
 }
+
+
+.buttons-row {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-right: 1rem;
+}
+

@@ -1,0 +1,20 @@
+<h5>Obstacles</h5>
+<mat-list *ngIf="road.obstacles.length > 0">
+  <mat-list-item *ngFor="let obstacle of road.obstacles">
+    <mat-icon (click)=deleteObstacle(obstacle.id) color="warn" matListIcon [matTooltip]="'Delete obstacle'">delete</mat-icon>
+    <img matListAvatar src="https://cdn.iconscout.com/icon/premium/png-256-thumb/tunnel-28-1088940.png" alt="height">
+    <h3 matLine> {{obstacle.name}} </h3>
+    <p matLine>
+      <span> ID: {{obstacle.id}} </span>
+      <span> -- {{obstacle.obstacleType}} obstacle in {{obstacle.city}}</span>
+    </p>
+    <p matLine class="comment">"{{obstacle.comment}}"</p>
+    <p>
+      <mat-icon *ngIf="!obstacle.immovable" color="accent" [matTooltip]="'This obstacle is not immovable'">check</mat-icon>
+      <mat-icon *ngIf="obstacle.immovable" color="warn" [matTooltip]="'This obstacle is immovable'">error</mat-icon>
+    </p>
+  </mat-list-item>
+</mat-list>
+<div *ngIf="road.obstacles.length === 0 || !road.obstacles">
+  <div>There are no obstacles on this road.</div>
+</div>
