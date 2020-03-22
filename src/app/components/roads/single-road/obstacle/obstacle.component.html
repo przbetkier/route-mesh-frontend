@@ -6,9 +6,9 @@
     <h3 matLine> {{obstacle.name}} </h3>
     <p matLine>
       <span> ID: {{obstacle.id}} </span>
-      <span> -- {{obstacle.obstacleType}} obstacle in {{obstacle.city}}</span>
+      <span> -- {{obstacle.type}} obstacle ({{obstacle.subtype}}) in {{obstacle.city}}</span>
     </p>
-    <p matLine class="comment">"{{obstacle.comment}}"</p>
+    <p *ngIf="obstacle.comment" matLine class="comment">"{{obstacle.comment}}"</p>
     <p>
       <mat-icon *ngIf="!obstacle.immovable" color="accent" [matTooltip]="'This obstacle is not immovable'">check</mat-icon>
       <mat-icon *ngIf="obstacle.immovable" color="warn" [matTooltip]="'This obstacle is immovable'">error</mat-icon>

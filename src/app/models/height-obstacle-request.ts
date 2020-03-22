@@ -8,10 +8,10 @@ export class HeightObstacleRequest {
               public milestone: number,
               public url: string,
               public comment: string,
-              public obstacleType: string,
+              public type: string,
               public limit: number,
               public heightProfile: number,
               public range: number,
-              public heightObstacleType: string) {
+              public subtype: string) {
   }
 }

@@ -40,11 +40,11 @@ export class NewObstacleDialogComponent {
       milestone: ['', Validators.required],
       url: [''],
       comment: [''],
-      obstacleType: ['', Validators.required],
+      type: ['', Validators.required],
       limit: ['', Validators.required],
       heightProfile: ['', Validators.required],
       range: ['', Validators.required],
-      heightObstacleType: ['', Validators.required]
+      subtype: ['', Validators.required]
     });
   }
 
@@ -84,8 +84,8 @@ export class NewObstacleDialogComponent {
     return this.formGroup.get('comment');
   }
 
-  get obstacleType() {
-    return this.formGroup.get('obstacleType');
+  get type() {
+    return this.formGroup.get('type');
   }
 
   get heightProfile() {
@@ -100,12 +100,12 @@ export class NewObstacleDialogComponent {
     return this.formGroup.get('range');
   }
 
-  get heightObstacleType() {
-    return this.formGroup.get('heightObstacleType');
+  get subtype() {
+    return this.formGroup.get('subtype');
   }
 
   addObstacle(formDirective: FormGroupDirective) {
-    if (this.obstacleType.value === 'HEIGHT') {
+    if (this.type.value === 'HEIGHT') {
       const request = new HeightObstacleRequest(
         this.roadId,
         this.name.value,
@@ -116,11 +116,11 @@ export class NewObstacleDialogComponent {
         this.milestone.value,
         this.url.value,
         this.comment.value,
-        this.obstacleType.value,
+        this.type.value,
         this.limit.value,
         this.heightProfile.value,
         this.range.value,
-        this.heightObstacleType.value
+        this.subtype.value
       );
       this.obstacleService.addHeightObstacle(request).subscribe(
         obs => {
