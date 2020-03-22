@@ -27,6 +27,7 @@ export class ObstacleComponent implements OnInit {
         this.snackBar.open(`Removed obstacle ${id}`, 'OK', {
           duration: 2000,
         });
+        this.obstacleRemoved.emit(id);
       }
     );
   }

@@ -38,7 +38,7 @@ export class NewObstacleDialogComponent {
       longitude: ['', Validators.required],
       immovable: ['', Validators.required],
       milestone: ['', Validators.required],
-      url: ['', Validators.required],
+      url: [''],
       comment: [''],
       obstacleType: ['', Validators.required],
       limit: ['', Validators.required],
