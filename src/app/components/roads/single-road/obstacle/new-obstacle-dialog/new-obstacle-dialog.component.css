@@ -1,0 +1,23 @@
+#close-obstacle-dialog-wrapper {
+  cursor: pointer!important;
+  position: relative;
+}
+
+mat-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.obstacle-form {
+  margin-top: 1rem;
+}
+
+button {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
