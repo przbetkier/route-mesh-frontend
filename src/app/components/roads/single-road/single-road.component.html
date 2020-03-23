@@ -50,13 +50,16 @@
 
 
       <div class="col-12 obstacles">
-        <app-obstacle [road]="road" (obstacleRemoved)="reload()"></app-obstacle>
+        <app-obstacle [obstacles]="road.obstacles" (obstacleRemoved)="reload()"></app-obstacle>
       </div>
 
       <div *ngIf="shouldShowMap" class="col-12 map">
         <agm-map [latitude]="lat" [longitude]="lng">
           <agm-direction [origin]="origin" [destination]="destination">
           </agm-direction>
+          <agm-marker *ngFor="let obstacle of road.obstacles" [latitude]="obstacle.latitude" [longitude]="obstacle.longitude">
+            <agm-info-window>{{obstacle.name}} at milestone: {{obstacle.milestone}}km</agm-info-window>
+          </agm-marker>
         </agm-map>
       </div>
     </div>

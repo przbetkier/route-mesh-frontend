@@ -1,0 +1,11 @@
+mat-list-item {
+  background-color: rgba(87, 87, 87, 0.26);
+}
+
+mat-card {
+  margin-top: 20px;
+}
+
+mat-list-item {
+  cursor: pointer;
+}

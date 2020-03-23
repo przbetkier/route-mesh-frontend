@@ -96,10 +96,10 @@
     <mat-spinner [diameter]="50" *ngIf="processing"></mat-spinner>
   </mat-card>
 
-  <mat-card *ngIf="roads && roads.length > 0">
+  <mat-card *ngIf="roads">
     <mat-card-content>
       <div class="row">
-        <div class="col-6"><h2>Roads ({{(filteredRoads | async)?.length}})</h2></div>
+        <div class="col-6"><h2>Roads ({{roads.length}})</h2></div>
         <div class="col-6">
           <form [formGroup]="searchFormGroup">
             <mat-form-field>
@@ -117,7 +117,7 @@
         </mat-paginator>
       </div>
 
-      <div class="roads-list" *ngFor="let road of filteredRoads | async">
+      <div class="roads-list" *ngFor="let road of roads">
         <app-single-road [road]="road" (onRoadRemove)="reload($event)"></app-single-road>
       </div>
     </mat-card-content>

@@ -18,8 +18,8 @@ export class RoadsService {
     return this.http.get<Road>(`${AppConfig.API_ENDPOINT}/roads/${id}`);
   }
 
-  public getRoads(page: number, pageSize: number): Observable<RoadsPage> {
-    return this.http.get<RoadsPage>(`${AppConfig.API_ENDPOINT}/roads?page=${page}&size=${pageSize}`);
+  public getRoads(page: number, pageSize: number, query: string): Observable<RoadsPage> {
+    return this.http.get<RoadsPage>(`${AppConfig.API_ENDPOINT}/roads?page=${page}&size=${pageSize}&query=${query}`);
   }
 
   public postRoad(roadRequest: RoadRequest): Observable<Road> {

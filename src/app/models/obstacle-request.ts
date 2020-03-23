@@ -1,4 +1,6 @@
-export class HeightObstacleRequest {
+import {Obstructions} from './obstructions-model';
+
+export class ObstacleRequest {
   constructor(public roadId: number,
               public name: string,
               public city: string,
@@ -8,10 +10,6 @@ export class HeightObstacleRequest {
               public milestone: number,
               public url: string,
               public comment: string,
-              public type: string,
-              public limit: number,
-              public heightProfile: number,
-              public range: number,
-              public subtype: string) {
+              public obstructions: Obstructions) {
   }
 }

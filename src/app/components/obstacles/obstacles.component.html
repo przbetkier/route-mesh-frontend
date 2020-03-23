@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-card>
+    <h2>Obstacles</h2>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item *ngFor="let obstacle of obstacles" (click)="showObstacleDetails(obstacle.id)">
+          <p matLine>ID: {{obstacle.id}} </p>
+          <p matLine>Name: {{obstacle.name}} </p>
+          <p matLine>City: {{obstacle.city}}</p>
+          <mat-divider></mat-divider>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+</div>

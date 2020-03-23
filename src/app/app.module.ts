@@ -39,6 +39,8 @@ import {NodesComponent} from './components/nodes/nodes.component';
 import {AppConfig} from './config/config';
 import {ObstacleComponent} from './components/roads/single-road/obstacle/obstacle.component';
 import {NewObstacleDialogComponent} from './components/roads/single-road/obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
+import { ObstacleDetailsComponent } from './components/roads/single-road/obstacle/obstacle-details/obstacle-details.component';
+import { ObstaclesComponent } from './components/obstacles/obstacles.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import {NewObstacleDialogComponent} from './components/roads/single-road/obstacl
     AdminFormComponent,
     NodesComponent,
     ObstacleComponent,
-    NewObstacleDialogComponent
+    NewObstacleDialogComponent,
+    ObstacleDetailsComponent,
+    ObstaclesComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -86,7 +90,7 @@ import {NewObstacleDialogComponent} from './components/roads/single-road/obstacl
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [NewObstacleDialogComponent]
+  entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent]
 })
 export class AppModule {
 }

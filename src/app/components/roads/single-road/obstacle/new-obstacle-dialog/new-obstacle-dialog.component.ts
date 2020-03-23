@@ -1,8 +1,9 @@
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
-import {HeightObstacleRequest} from '../../../../../models/height-obstacle-request';
+import {ObstacleRequest} from '../../../../../models/obstacle-request';
 import {ObstacleService} from '../../../../../services/obstacle.service';
+import {HeightObstruction, Obstructions} from '../../../../../models/obstructions-model';
 
 export interface NewObstacleDialogData {
   roadId: number;
@@ -106,7 +107,7 @@ export class NewObstacleDialogComponent {
 
   addObstacle(formDirective: FormGroupDirective) {
     if (this.type.value === 'HEIGHT') {
-      const request = new HeightObstacleRequest(
+      const request = new ObstacleRequest(
         this.roadId,
         this.name.value,
         this.city.value,
@@ -116,15 +117,16 @@ export class NewObstacleDialogComponent {
         this.milestone.value,
         this.url.value,
         this.comment.value,
-        this.type.value,
-        this.limit.value,
-        this.heightProfile.value,
-        this.range.value,
-        this.subtype.value
+        new Obstructions(
+          new HeightObstruction(this.type.value,
+            this.limit.value,
+            this.heightProfile.value,
+            this.range.value,
+            this.subtype.value)
+        )
       );
-      this.obstacleService.addHeightObstacle(request).subscribe(
+      this.obstacleService.addObstacle(request).subscribe(
         obs => {
-          console.log('Added new obstacle ' + obs.id);
           this.snackBar.open(`Added new obstacle ${obs.id}`, 'OK', {
             duration: 2000,
           });
@@ -133,5 +135,4 @@ export class NewObstacleDialogComponent {
       );
     }
   }
-
 }
