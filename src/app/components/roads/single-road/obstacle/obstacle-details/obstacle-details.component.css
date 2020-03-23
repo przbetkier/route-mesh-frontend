@@ -1,0 +1,15 @@
+#dialog-wrapper {
+  cursor: pointer!important;
+  position: relative;
+}
+
+mat-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.comment {
+  font-style: italic;
+}

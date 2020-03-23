@@ -10,3 +10,7 @@ mat-list-item {
 mat-icon {
   cursor: pointer;
 }
+
+button {
+  cursor: pointer;
+}

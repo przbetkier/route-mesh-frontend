@@ -1,0 +1,34 @@
+<div id="dialog-wrapper">
+  <mat-icon (click)="dialogRef.close()">close</mat-icon>
+</div>
+
+<div class="container">
+  <p *ngIf="hasErrors">Something went wrong, please try later.</p>
+  <mat-spinner *ngIf="loading" [diameter]="50"></mat-spinner>
+  <div *ngIf="obstacle">
+    <h3>{{obstacle.name}}</h3>
+    <p>City: {{obstacle.city}}</p>
+    <h5>Location</h5>
+    <ul>
+      <li>Latitude: {{obstacle.latitude}}</li>
+      <li>Longitude: {{obstacle.longitude}}</li>
+      <li>Milestone: {{obstacle.milestone}}</li>
+    </ul>
+    <p class="comment" *ngIf="obstacle.comment">"{{obstacle.comment}}"</p>
+    <mat-divider></mat-divider>
+    <div class="obstructions">
+      <h4>Obstructions:</h4>
+      <mat-list>
+        <mat-list-item *ngIf="obstacle.obstructions.height">
+          <div matSubheader>Height obstruction</div>
+          <p matLine>Type: {{obstacle.obstructions.height.subtype}}</p>
+          <p matLine>Limit: {{obstacle.obstructions.height.limit}}</p>
+          <p matLine>Range: {{obstacle.obstructions.height.range}}</p>
+          <p matLine>Profile: {{obstacle.obstructions.height.profile}}</p>
+        </mat-list-item>
+      </mat-list>
+      <div>
+      </div>
+    </div>
+  </div>
+</div>

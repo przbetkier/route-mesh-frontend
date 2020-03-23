@@ -24,11 +24,11 @@ export class RoadsComponent implements OnInit {
   selectedAdmins = new FormControl();
   loading = true;
   roads: Road[] = [];
-  filteredRoads: Observable<Road[]>;
   nodes: Node[] = [];
   admins: Admin[] = [];
   filteredStartNodes: Observable<Node[]>;
   filteredEndNodes: Observable<Node[]>;
+  query = '';
 
   page = 0;
   pageSize = 20;
@@ -111,12 +111,12 @@ export class RoadsComponent implements OnInit {
   }
 
   getRoads() {
-    return this.roadService.getRoads(this.page, this.pageSize).subscribe(roadsPage => {
+    return this.roadService.getRoads(this.page, this.pageSize, this.query).subscribe(roadsPage => {
       this.roads = roadsPage.content;
       this.page = roadsPage.pageable.pageNumber;
       this.length = roadsPage.totalElements;
       this.loading = false;
-      this.filteredRoads = this.filteredRoadsObs();
+      this.filteredRoadsObs().subscribe();
     });
   }
 
@@ -153,10 +153,17 @@ export class RoadsComponent implements OnInit {
     );
   }
 
-  filteredRoadsObs(): Observable<Road[]> {
+  filteredRoadsObs(): Observable<string> {
     return this.searchFormGroup.get('searchInput').valueChanges.pipe(
-      startWith(''),
-      map(value => this._filterSearch(value)));
+      map(value => {
+          if (value !== this.query) {
+            this.query = value;
+            this.page = 0;
+            this.getRoads();
+          }
+          return value;
+        }
+      ));
   }
 
   isFormValid(): boolean {
@@ -191,7 +198,6 @@ export class RoadsComponent implements OnInit {
         formDirective.resetForm();
         this.filteredStartNodes = this.filteredStartNodesObs();
         this.filteredEndNodes = this.filteredEndNodesObs();
-        this.filteredRoads = this.filteredRoadsObs();
         this.processing = false;
       }, error => {
         this.processing = false;
@@ -203,11 +209,6 @@ export class RoadsComponent implements OnInit {
   private _filter(value: string): Node[] {
     const filterValue = value.toLowerCase();
     return this.nodes.filter(node => node.name.toLowerCase().indexOf(filterValue) >= 0);
-  }
-
-  private _filterSearch(value: string): Road[] {
-    const filterValue = value.toLowerCase();
-    return this.roads.filter(road => road.name.toLowerCase().indexOf(filterValue) >= 0);
   }
 
   reload(removedId: number) {

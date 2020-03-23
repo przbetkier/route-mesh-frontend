@@ -1,6 +1,5 @@
 import {SimpleNode} from './simple-node-model';
 import {SimpleAdmin} from './simple-admin';
-import {SimpleRoadObstacle} from './simple-road-obstacle';
 
 export class Road {
   constructor(public id: number,
@@ -16,6 +15,17 @@ export class Road {
               public trafficFactor: number,
               public width: number,
               public admins: SimpleAdmin[],
-              public obstacles: SimpleRoadObstacle[]) {
+              public obstacles: SimpleObstacle[]) {
   }
+}
+
+export interface SimpleObstacle {
+  id: number;
+  name: string;
+  city: string;
+  latitude: number;
+  longitude: number;
+  milestone: number;
+  immovable: boolean;
+  comment: string;
 }

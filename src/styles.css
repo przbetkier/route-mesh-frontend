@@ -2,3 +2,6 @@ body {
   background-image: url("assets/background/bg.png");
 }
 
+agm-map {
+  color: black;
+}
