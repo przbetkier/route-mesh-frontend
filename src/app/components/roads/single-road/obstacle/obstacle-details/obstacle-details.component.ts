@@ -1,6 +1,5 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {NewObstacleDialogData} from '../new-obstacle-dialog/new-obstacle-dialog.component';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {ObstacleService} from '../../../../../services/obstacle.service';
 import {Obstacle} from '../../../../../models/obstacle';
 
@@ -36,5 +35,4 @@ export class ObstacleDetailsComponent implements OnInit {
       }
     );
   }
-
 }

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ObstacleService} from '../../services/obstacle.service';
 import {Obstacle} from '../../models/obstacle';
 import {ObstacleDetailsComponent} from '../roads/single-road/obstacle/obstacle-details/obstacle-details.component';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 
 @Component({
   selector: 'app-obstacles',
@@ -12,14 +12,14 @@ import {MatDialog} from '@angular/material';
 export class ObstaclesComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
-              private obstacleService: ObstacleService) {
+              private obstacleService: ObstacleService,
+              private snackBar: MatSnackBar) {
   }
 
   obstacles: Obstacle[];
 
   ngOnInit() {
-    this.obstacleService.getAll()
-      .subscribe(ob => this.obstacles = ob);
+    this.loadObstacles();
   }
 
   showObstacleDetails(obstacleId: number) {
@@ -28,6 +28,21 @@ export class ObstaclesComponent implements OnInit {
       data: {id: obstacleId},
       panelClass: 'custom-modalbox'
     });
+  }
+
+  private loadObstacles() {
+    this.obstacleService.getAll()
+      .subscribe(ob => this.obstacles = ob);
+  }
+
+  deleteObstacle(id: number) {
+    this.obstacleService.deleteObstacle(id)
+      .subscribe(
+        () => {
+          this.snackBar.open(`Removed obstacle ${id}`, 'OK', {duration: 2000});
+          this.loadObstacles();
+        }
+      );
   }
 
 }

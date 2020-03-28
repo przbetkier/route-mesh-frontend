@@ -1,5 +1,5 @@
 <div id="dialog-wrapper">
-  <mat-icon (click)="dialogRef.close()">close</mat-icon>
+  <mat-icon class="icon-close" (click)="dialogRef.close()">close</mat-icon>
 </div>
 
 <div class="container">
@@ -8,12 +8,19 @@
   <div *ngIf="obstacle">
     <h3>{{obstacle.name}}</h3>
     <p>City: {{obstacle.city}}</p>
-    <h5>Location</h5>
-    <ul>
-      <li>Latitude: {{obstacle.latitude}}</li>
-      <li>Longitude: {{obstacle.longitude}}</li>
-      <li>Milestone: {{obstacle.milestone}}</li>
-    </ul>
+    <div class="section">
+      <img class="icon" src="../../../../../../assets/icons/coords.png" alt="coords"/>
+      <span>Coords: [lat={{obstacle.latitude}}, lon={{obstacle.longitude}}]</span>
+    </div>
+    <div class="section">
+      <img class="icon" src="../../../../../../assets/icons/milestone.png" alt="milestone"/>
+      <span>Milestone: {{obstacle.milestone}}</span>
+    </div>
+    <div class="section">
+      <span>Movable:</span>
+      <mat-icon class="immovable-icon" *ngIf="!obstacle.immovable" color="accent" [matTooltip]="'This obstacle is not immovable'">check</mat-icon>
+      <mat-icon class="immovable-icon" *ngIf="obstacle.immovable" color="warn" [matTooltip]="'This obstacle is immovable'">error</mat-icon>
+    </div>
     <p class="comment" *ngIf="obstacle.comment">"{{obstacle.comment}}"</p>
     <mat-divider></mat-divider>
     <div class="obstructions">
@@ -21,14 +28,22 @@
       <mat-list>
         <mat-list-item *ngIf="obstacle.obstructions.height">
           <div matSubheader>Height obstruction</div>
-          <p matLine>Type: {{obstacle.obstructions.height.subtype}}</p>
+          <p matLine>Subtype: {{obstacle.obstructions.height.subtype}}</p>
           <p matLine>Limit: {{obstacle.obstructions.height.limit}}</p>
           <p matLine>Range: {{obstacle.obstructions.height.range}}</p>
           <p matLine>Profile: {{obstacle.obstructions.height.profile}}</p>
         </mat-list-item>
+
+        <mat-divider></mat-divider>
+
+        <mat-list-item *ngIf="obstacle.obstructions.weight">
+          <div matSubheader>Weight obstruction</div>
+          <p matLine>Subtype: {{obstacle.obstructions.weight.subtype}}</p>
+          <p matLine>Limit: {{obstacle.obstructions.weight.limit}}</p>
+          <p matLine>MLC: {{obstacle.obstructions.weight.mlc}}</p>
+        </mat-list-item>
+
       </mat-list>
-      <div>
-      </div>
     </div>
   </div>
 </div>
