@@ -31,3 +31,9 @@ mat-divider {
   vertical-align: bottom;
   margin-left: 8px;
 }
+
+.hint {
+  font-style: italic;
+  color: gray;
+  font-size: 12px!important;
+}
