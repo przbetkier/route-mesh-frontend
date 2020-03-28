@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ObstacleRequest} from '../../../../../models/obstacle-request';
 import {ObstacleService} from '../../../../../services/obstacle.service';
-import {HeightObstruction, Obstructions, WeightObstruction} from '../../../../../models/obstructions-model';
+import {HeightObstruction, Obstructions, WeightObstruction, WidthObstruction} from '../../../../../models/obstructions-model';
 import {isNullOrUndefined} from 'util';
 
 export interface NewObstacleDialogData {
@@ -21,11 +21,12 @@ export class NewObstacleDialogComponent {
     formGroup: FormGroup;
     roadId: number;
     roadName: string;
-    obstructionTypes = ['HEIGHT', 'WEIGHT'];
+    obstructionTypes = ['HEIGHT', 'WEIGHT', 'WIDTH'];
 
     heightObstacleProfiles = ['LINE', 'SEMICIRCLE', 'QUARTER_CIRCLE'];
     heightObstacleTypes = ['OVERPASS', 'TUNNEL', 'DEVICE', 'CABLES', 'PIPE', 'OTHER'];
     weightObstacleSubtypes = ['BRIDGE', 'OVERPASS', 'ZONE', 'OTHER'];
+    widthObstacleSubtypes = ['TUNNEL', 'TREE', 'LAMP', 'SIGN', 'GANTRY', 'OTHER'];
 
     selectedObstructions = new FormControl([], Validators.required);
 
@@ -51,12 +52,17 @@ export class NewObstacleDialogComponent {
             heightSubtype: new FormControl({value: '', disabled: true}, Validators.required),
             weightSubtype: new FormControl({value: '', disabled: true}, Validators.required),
             weightMlc: new FormControl({value: '', disabled: true}, Validators.required),
-            weightLimit: new FormControl({value: '', disabled: true}, Validators.required)
+            weightLimit: new FormControl({value: '', disabled: true}, Validators.required),
+            widthSubtype: new FormControl({value: '', disabled: true}, Validators.required),
+            widthLimits: new FormControl({value: '', disabled: true}, Validators.required),
+            widthRanges: new FormControl({value: '', disabled: true}, Validators.required),
+            widthSymmetric: new FormControl({value: '', disabled: true}, Validators.required)
         });
         this.selectedObstructions.valueChanges.subscribe(val => {
             if (isNullOrUndefined(val) || val.length === 0) {
                 this.disableHeightForm();
                 this.disableWeightForm();
+                this.disableWidthForm();
             }
 
             if (val.includes('HEIGHT')) {
@@ -75,6 +81,15 @@ export class NewObstacleDialogComponent {
             } else {
                 this.disableWeightForm();
             }
+
+            if (val.includes('WIDTH')) {
+                this.formGroup.get('widthSubtype').enable();
+                this.formGroup.get('widthLimits').enable();
+                this.formGroup.get('widthRanges').enable();
+                this.formGroup.get('widthSymmetric').enable();
+            } else {
+                this.disableWidthForm();
+            }
         });
     }
 
@@ -89,6 +104,13 @@ export class NewObstacleDialogComponent {
         this.formGroup.get('weightSubtype').disable();
         this.formGroup.get('weightMlc').disable();
         this.formGroup.get('weightLimit').disable();
+    }
+
+    disableWidthForm() {
+        this.formGroup.get('widthSubtype').disable();
+        this.formGroup.get('widthLimits').disable();
+        this.formGroup.get('widthRanges').disable();
+        this.formGroup.get('widthSymmetric').disable();
     }
 
     isFormValid(): boolean {
@@ -155,6 +177,22 @@ export class NewObstacleDialogComponent {
         return this.formGroup.get('weightLimit');
     }
 
+    get widthLimits() {
+        return this.formGroup.get('widthLimits');
+    }
+
+    get widthSymmetric() {
+        return this.formGroup.get('widthSymmetric');
+    }
+
+    get widthRanges() {
+        return this.formGroup.get('widthRanges');
+    }
+
+    get widthSubtype() {
+        return this.formGroup.get('widthSubtype');
+    }
+
     get obstructions(): string[] {
         return isNullOrUndefined(this.selectedObstructions.value) ? [] : this.selectedObstructions.value;
     }
@@ -176,6 +214,16 @@ export class NewObstacleDialogComponent {
                 this.weightSubtype.value) : null;
     }
 
+    getWidthObstruction(): WidthObstruction {
+        return this.widthObstructionSelected() ?
+            new WidthObstruction(
+                this.widthLimits.value.replace(/\s/g, '').split(','),
+                this.widthRanges.value.replace(/\s/g, '').split(','),
+                this.widthSymmetric.value,
+                this.widthSubtype.value
+            ) : null;
+    }
+
     heightObstructionSelected(): boolean {
         return this.obstructions.includes('HEIGHT');
     }
@@ -184,9 +232,14 @@ export class NewObstacleDialogComponent {
         return this.obstructions.includes('WEIGHT');
     }
 
+    widthObstructionSelected(): boolean {
+        return this.obstructions.includes('WIDTH');
+    }
+
     addObstacle(formDirective: FormGroupDirective) {
         const heightObstruction = this.getHeightObstruction();
         const weightObstruction = this.getWeightObstruction();
+        const widthObstruction = this.getWidthObstruction();
         const request = new ObstacleRequest(
             this.roadId,
             this.name.value,
@@ -199,7 +252,8 @@ export class NewObstacleDialogComponent {
             this.comment.value,
             new Obstructions(
                 heightObstruction,
-                weightObstruction
+                weightObstruction,
+                widthObstruction
             )
         );
         this.obstacleService.addObstacle(request).subscribe(

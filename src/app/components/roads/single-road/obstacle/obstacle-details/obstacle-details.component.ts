@@ -2,6 +2,8 @@ import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {ObstacleService} from '../../../../../services/obstacle.service';
 import {Obstacle} from '../../../../../models/obstacle';
+import {WidthObstruction} from '../../../../../models/obstructions-model';
+import {isNullOrUndefined} from 'util';
 
 export interface ObstacleDetailsDialogData {
   id: number;
@@ -36,3 +38,4 @@ export class ObstacleDetailsComponent implements OnInit {
     );
   }
 }
+

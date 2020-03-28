@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Road} from '../../../models/road-model';
 import {RoadsService} from '../../../services/roads.service';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {NewObstacleDialogComponent} from './obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
-import {ObstacleService} from '../../../services/obstacle.service';
 
 @Component({
   selector: 'app-single-road',
