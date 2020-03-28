@@ -3,7 +3,7 @@
   position: relative;
 }
 
-mat-icon {
+.icon-close {
   position: absolute;
   top: 0;
   right: 0;
@@ -12,4 +12,22 @@ mat-icon {
 
 .comment {
   font-style: italic;
+}
+
+.icon {
+  height:24px;
+  margin-right: 12px;
+}
+
+.section {
+  padding: 8px;
+}
+
+mat-divider {
+  padding: 8px;
+}
+
+.immovable-icon {
+  vertical-align: bottom;
+  margin-left: 8px;
 }

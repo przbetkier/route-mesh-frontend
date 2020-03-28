@@ -24,8 +24,7 @@ export class SingleRoadComponent implements OnInit {
 
   shouldShowMap = false;
 
-  constructor(public dialog: MatDialog, private roadService: RoadsService, private obstacleService: ObstacleService,
-              private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog, private roadService: RoadsService) {
   }
 
   ngOnInit() {

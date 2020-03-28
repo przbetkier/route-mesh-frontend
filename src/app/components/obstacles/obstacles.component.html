@@ -7,6 +7,10 @@
           <p matLine>ID: {{obstacle.id}} </p>
           <p matLine>Name: {{obstacle.name}} </p>
           <p matLine>City: {{obstacle.city}}</p>
+          <p>
+            <mat-icon *ngIf="!obstacle.immovable" color="accent" [matTooltip]="'This obstacle is not immovable'">check</mat-icon>
+            <mat-icon *ngIf="obstacle.immovable" color="warn" [matTooltip]="'This obstacle is immovable'">error</mat-icon>
+          </p>
           <mat-divider></mat-divider>
         </mat-list-item>
       </mat-list>
