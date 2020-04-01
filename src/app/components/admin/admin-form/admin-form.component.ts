@@ -25,8 +25,7 @@ export class AdminFormComponent implements OnInit {
       postalCode: ['', Validators.required],
       telephone: ['', Validators.required],
       email: [''],
-      fax: [''],
-
+      fax: ['']
     });
   }
 
