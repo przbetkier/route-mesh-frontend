@@ -1,6 +1,18 @@
 <div class="container">
   <mat-card>
     <h2>Obstacles</h2>
+
+    <div class="col-12 map">
+      <agm-map [latitude]="52.22" [longitude]="21.01">
+        <agm-marker *ngFor="let obstacle of obstacles" [latitude]="obstacle.latitude" [longitude]="obstacle.longitude">
+          <agm-info-window>
+            {{obstacle.name}} at milestone: {{obstacle.milestone}}km
+            <button mat-button color="accent" (click)="showObstacleDetails(obstacle.id)">Show more</button>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </div>
+
     <mat-card-content>
       <mat-list>
         <mat-list-item *ngFor="let obstacle of obstacles" (click)="showObstacleDetails(obstacle.id)">
