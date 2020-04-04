@@ -25,7 +25,7 @@ export class NewObstacleDialogComponent {
 
     heightObstacleProfiles = ['LINE', 'SEMICIRCLE', 'QUARTER_CIRCLE'];
     heightObstacleTypes = ['OVERPASS', 'TUNNEL', 'DEVICE', 'CABLES', 'PIPE', 'OTHER'];
-    weightObstacleSubtypes = ['BRIDGE', 'OVERPASS', 'ZONE', 'OTHER'];
+    weightObstacleSubtypes = ['BRIDGE', 'ESTACADE', 'OVERPASS', 'ZONE', 'OTHER'];
     widthObstacleSubtypes = ['TUNNEL', 'TREE', 'LAMP', 'SIGN', 'GANTRY', 'OTHER'];
 
     selectedObstructions = new FormControl([], Validators.required);
