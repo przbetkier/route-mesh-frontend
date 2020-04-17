@@ -37,5 +37,4 @@ export class ObstacleComponent implements OnInit {
         }
       );
   }
-
 }

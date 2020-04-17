@@ -33,18 +33,17 @@
             <p matLine>Limit: {{obstacle.obstructions.height.limit}}</p>
             <p matLine>Range: {{obstacle.obstructions.height.range}}</p>
             <p matLine>Profile: {{obstacle.obstructions.height.profile}}</p>
+            <mat-divider mat-line></mat-divider>
           </mat-list-item>
-
-          <mat-divider></mat-divider>
 
           <mat-list-item *ngIf="obstacle.obstructions.weight">
             <div matSubheader>Weight obstruction</div>
             <p matLine>Subtype: {{obstacle.obstructions.weight.subtype}}</p>
             <p matLine>Limit: {{obstacle.obstructions.weight.limit}}</p>
             <p matLine>MLC: {{obstacle.obstructions.weight.mlc}}</p>
+            <mat-divider mat-line></mat-divider>
           </mat-list-item>
 
-          <mat-divider></mat-divider>
 
           <mat-list-item *ngIf="obstacle.obstructions.width">
             <div matSubheader>Width obstruction</div>

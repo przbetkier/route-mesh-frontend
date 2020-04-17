@@ -32,6 +32,10 @@ mat-card {
   padding: 8px;
 }
 
+.roads-card {
+  margin-bottom: 32px;
+}
+
 .pagination {
   padding: 8px;
 }

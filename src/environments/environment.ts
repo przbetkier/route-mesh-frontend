@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   APIEndpoint: 'http://localhost:8081',
-  GMAP_API_KEY: 'key'
+  GMAP_API_KEY: 'key',
+  AUTH_TOKEN_EXPIRATION_TIME: 86400000
 };
 
 /*
