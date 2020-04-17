@@ -23,14 +23,6 @@ export class LoginService {
       password: credentials.password
     }, httpOptions);
   }
-
-  register(user: User): Observable<any> {
-    return this.http.post(AUTH_API + 'signup', {
-      username: user.username,
-      email: user.email,
-      password: user.password
-    }, httpOptions);
-  }
 }
 
 export class User {

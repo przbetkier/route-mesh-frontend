@@ -41,9 +41,9 @@ import {ObstacleComponent} from './components/roads/single-road/obstacle/obstacl
 import {NewObstacleDialogComponent} from './components/roads/single-road/obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
 import {ObstacleDetailsComponent} from './components/roads/single-road/obstacle/obstacle-details/obstacle-details.component';
 import {ObstaclesComponent} from './components/obstacles/obstacles.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignupComponent } from './components/signup/signup.component';
+import {LoginComponent} from './components/login/login.component';
 import {authInterceptorProviders} from './helpers/auth.interceptor';
+import {RouteGuardService} from './services/route-guard.service';
 
 @NgModule({
   declarations: [
@@ -58,8 +58,7 @@ import {authInterceptorProviders} from './helpers/auth.interceptor';
     NewObstacleDialogComponent,
     ObstacleDetailsComponent,
     ObstaclesComponent,
-    LoginComponent,
-    SignupComponent
+    LoginComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -93,7 +92,7 @@ import {authInterceptorProviders} from './helpers/auth.interceptor';
     MatPaginatorModule,
     MatSnackBarModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders, RouteGuardService],
   bootstrap: [AppComponent],
   entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent]
 })

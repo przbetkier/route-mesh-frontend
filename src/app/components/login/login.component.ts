@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Credentials, LoginService} from '../../services/login.service';
 import {TokenStorageService} from '../../services/token-storage.service';
 import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private loginService: LoginService,
               private tokenStorage: TokenStorageService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -46,9 +48,10 @@ export class LoginComponent implements OnInit {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
         this.snackBar.open(
-          'Logged successfuly',
-          'OK', {duration: 2000}
+          'Logged successfully!',
+          'OK', {duration: 2000, panelClass: ['green-snackbar']}
         );
+        this.router.navigateByUrl('/');
       }
     );
   }

@@ -260,6 +260,7 @@ export class NewObstacleDialogComponent {
             obs => {
                 this.snackBar.open(`Added new obstacle ${obs.id}`, 'OK', {
                     duration: 2000,
+                    panelClass: ['blue-snackbar']
                 });
                 this.dialogRef.close();
             }
