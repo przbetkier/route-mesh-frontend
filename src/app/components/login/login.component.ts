@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Credentials, LoginService} from '../../services/login.service';
 import {TokenStorageService} from '../../services/token-storage.service';
 import {MatSnackBar} from '@angular/material';
@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
     return this.formGroup.valid;
   }
 
-  login() {
+  login(formDirective: FormGroupDirective) {
     const credentials = new Credentials(this.username.value, this.password.value);
     this.loginService.login(credentials).subscribe(
       data => {
