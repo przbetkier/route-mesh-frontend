@@ -9,3 +9,11 @@ mat-card {
 mat-list-item {
   cursor: pointer;
 }
+
+agm-map {
+  height: 500px;
+}
+
+.map {
+  margin-bottom: 24px;
+}
