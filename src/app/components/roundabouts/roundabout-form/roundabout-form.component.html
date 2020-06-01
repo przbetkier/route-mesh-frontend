@@ -1,0 +1,49 @@
+<div class="container">
+  <mat-card>
+    <h3>Create roundabout for node {{nodeId}}</h3>
+
+    <agm-map *ngIf="!isLoading" class="map" [latitude]="node.latitude" [longitude]="node.longitude" [zoom]="16">
+      <agm-marker [latitude]="node.latitude" [longitude]="node.longitude">
+      </agm-marker>
+    </agm-map>
+
+    <div *ngIf="node">
+      <h2>{{node.name}}</h2>
+
+      <form [formGroup]="formGroup" #formDirective="ngForm" (ngSubmit)="createRoundabout(formDirective)">
+        <mat-form-field>
+          <input type="number" matInput formControlName="innerDiameter" required>
+          <mat-placeholder>Inner diameter [mm]</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="outerDiameter" required>
+          <mat-placeholder>Outer diameter [mm]</mat-placeholder>
+        </mat-form-field>
+        <div formArrayName="exits">
+          <div
+            [formGroupName]="i"
+            *ngFor="let control of formGroup.get('exits').controls; index as i">
+
+            {{control.get('name').value}}
+            <div class="form-group">
+              <mat-form-field>
+              <input type="number" matInput
+                formControlName="startAngle"
+                [class.is-invalid]="control.invalid">
+                <mat-placeholder>Enter angle</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput
+                       formControlName="endAngle"
+                       [class.is-invalid]="control.invalid">
+                <mat-placeholder>Exit angle</mat-placeholder>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid() || processing">Add roundabout</button>
+      </form>
+    </div>
+
+  </mat-card>
+</div>

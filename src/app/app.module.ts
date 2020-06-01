@@ -19,6 +19,7 @@ import {
   MatMenuModule,
   MatPaginatorModule,
   MatProgressSpinnerModule,
+  MatRadioModule,
   MatSelectModule,
   MatSnackBarModule,
   MatStepperModule,
@@ -44,6 +45,8 @@ import {ObstaclesComponent} from './components/obstacles/obstacles.component';
 import {LoginComponent} from './components/login/login.component';
 import {authInterceptorProviders} from './helpers/auth.interceptor';
 import {RouteGuardService} from './services/route-guard.service';
+import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabout.component';
+import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import {RouteGuardService} from './services/route-guard.service';
     NewObstacleDialogComponent,
     ObstacleDetailsComponent,
     ObstaclesComponent,
-    LoginComponent
+    LoginComponent,
+    RoundaboutComponent,
+    RoundaboutFormComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -82,6 +87,7 @@ import {RouteGuardService} from './services/route-guard.service';
     MatExpansionModule,
     MatDividerModule,
     MatListModule,
+    MatRadioModule,
     MatIconModule,
     MatSelectModule,
     MatToolbarModule,

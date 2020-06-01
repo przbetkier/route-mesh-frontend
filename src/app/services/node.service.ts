@@ -15,4 +15,8 @@ export class NodeService {
   public getNodes(): Observable<Node[]> {
     return this.http.get<Node[]>(`${AppConfig.API_ENDPOINT}/nodes`);
   }
+
+  public getNode(nodeId: number): Observable<Node> {
+    return this.http.get<Node>(`${AppConfig.API_ENDPOINT}/nodes/${nodeId}`);
+  }
 }

@@ -1,0 +1,21 @@
+.exit {
+  padding: 8px;
+  border-bottom: 1px solid gray;
+}
+
+.buttons {
+  margin-top: 16px;
+}
+
+button {
+  margin-right: 12px;
+}
+
+agm-map {
+  height: 50vh;
+}
+
+.map {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
