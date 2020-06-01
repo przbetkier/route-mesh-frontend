@@ -15,3 +15,11 @@ mat-card {
 h2 {
   color: white;
 }
+
+.agm-window-content > div {
+  margin-top: 12px;
+}
+
+mat-radio-button {
+  margin-right: 8px;
+}

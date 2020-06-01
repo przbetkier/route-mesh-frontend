@@ -1,0 +1,79 @@
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <h2>Roundabouts:</h2>
+      <div *ngIf="loading">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div *ngIf="!loading">
+
+        <div class="map">
+          <agm-map [latitude]="52.229676" [longitude]="21.012229" [zoom]="7.5">
+            <agm-marker *ngFor="let roundabout of roundabouts" [latitude]="roundabout.node.latitude"
+                        [longitude]="roundabout.node.longitude">
+              <agm-info-window>
+                <p>{{roundabout.node.name}}</p>
+                <p>Inner diameter: {{roundabout.innerDiameter}}</p>
+                <p>Outer diameter: {{roundabout.outerDiameter}}</p>
+                <p>Exits: {{roundabout.roundaboutExits.length}}</p>
+              </agm-info-window>
+            </agm-marker>
+          </agm-map>
+        </div>
+        <mat-accordion>
+          <div *ngFor="let roundabout of roundabouts">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
+                <mat-panel-title>
+                  {{roundabout.node.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <p>Inner diameter: {{roundabout.innerDiameter}}</p>
+                    <p>Outer diameter: {{roundabout.outerDiameter}}</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h4>Exits:</h4>
+                  </div>
+                </div>
+                <div class="row exit" *ngFor="let exit of roundabout.roundaboutExits">
+                  <div class="col-4"><p>Road: {{exit.roadName}}</p></div>
+                  <div class="col-4"><p>Start angle: {{exit.startAngle}}</p></div>
+                  <div class="col-4"><p>End angle: {{exit.endAngle}}</p></div>
+                </div>
+
+                <agm-map *ngIf="shouldShowRoundaboutMap(roundabout.id)"
+                         [latitude]="roundabout.node.latitude"
+                         [longitude]="roundabout.node.longitude"
+                         [zoom]="17">
+                  <agm-marker [latitude]="roundabout.node.latitude"
+                              [longitude]="roundabout.node.longitude">
+                  </agm-marker>
+                </agm-map>
+
+
+                <div class="row buttons">
+                  <div class="col-12">
+                    <button mat-raised-button color="primary" (click)="toggle(roundabout.id)">
+                      <span *ngIf="shouldShowRoundaboutMap(roundabout.id)">Hide</span>
+                      <span *ngIf="!shouldShowRoundaboutMap(roundabout.id)">Show</span>
+                      map
+                    </button>
+                    <button mat-raised-button color="warn" (click)="deleteRoundabout(roundabout.id)">Delete roundabout</button>
+                  </div>
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+          </div>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

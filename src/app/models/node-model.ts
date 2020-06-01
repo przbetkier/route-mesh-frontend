@@ -5,7 +5,8 @@ export class Node {
               public name: string,
               public latitude: number,
               public longitude: number,
-              public startRoads: SimpleRoad,
-              public endRoads: SimpleRoad) {
+              public startRoads: SimpleRoad[],
+              public endRoads: SimpleRoad[],
+              public type: string) {
   }
 }
