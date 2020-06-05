@@ -24,7 +24,7 @@
             [formGroupName]="i"
             *ngFor="let control of formGroup.get('exits').controls; index as i">
 
-            {{control.get('name').value}}
+            {{control.get('name').value}} (id: {{control.get('id').value}})
             <div class="form-group">
               <mat-form-field>
               <input type="number" matInput

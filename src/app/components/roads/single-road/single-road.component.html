@@ -2,7 +2,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header [collapsedHeight]="'125px'" [expandedHeight]="'125px'">
       <mat-panel-title>
-        <h6>{{road.name}} </h6>
+        <h6>{{road.name}}</h6>
         From <span class="from-dest">{{road.startNode.name}}</span><br>
         to <span class="from-dest">{{road.endNode.name}}</span>
       </mat-panel-title>
@@ -23,6 +23,9 @@
     </div>
 
     <div class="row">
+      <div class="col-12">
+        <p><strong>Road ID:</strong><span class="road-id">{{road.id}}</span></p>
+      </div>
       <div class="col-6">
         <p><strong>Start:</strong> [{{road.startNode.latitude | number: '1.0-5'}}, {{road.startNode.longitude | number: '1.0-5'}}]</p>
         <p><strong>Numbers:</strong>
