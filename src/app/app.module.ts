@@ -47,6 +47,8 @@ import {authInterceptorProviders} from './helpers/auth.interceptor';
 import {RouteGuardService} from './services/route-guard.service';
 import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabout.component';
 import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
+import { RestpointComponent } from './components/roads/single-road/restpoint/restpoint.component';
+import { NewRestpointDialogComponent } from './components/roads/single-road/restpoint/new-restpoint-dialog/new-restpoint-dialog.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,9 @@ import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/
     ObstaclesComponent,
     LoginComponent,
     RoundaboutComponent,
-    RoundaboutFormComponent
+    RoundaboutFormComponent,
+    RestpointComponent,
+    NewRestpointDialogComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -100,7 +104,7 @@ import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/
   ],
   providers: [authInterceptorProviders, RouteGuardService],
   bootstrap: [AppComponent],
-  entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent]
+  entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent, NewRestpointDialogComponent]
 })
 export class AppModule {
 }

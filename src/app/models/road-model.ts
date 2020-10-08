@@ -15,7 +15,8 @@ export class Road {
               public trafficFactor: number,
               public width: number,
               public admins: SimpleAdmin[],
-              public obstacles: SimpleObstacle[]) {
+              public obstacles: SimpleObstacle[],
+              public restPoints: RestPoint[]) {
   }
 }
 
@@ -28,4 +29,14 @@ export interface SimpleObstacle {
   milestone: number;
   immovable: boolean;
   comment: string;
+}
+
+export interface RestPoint {
+  id: number;
+  latitude: number;
+  longitude: number;
+  milestone: number;
+  width: number;
+  length: number;
+  name: string;
 }

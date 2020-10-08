@@ -26,6 +26,10 @@ span {
   background: #1976d2;
 }
 
+.red-snackbar {
+  background: #d2111d;
+}
+
 .green-snackbar {
   background: #66bb6a;
 }
