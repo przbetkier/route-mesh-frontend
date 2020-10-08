@@ -18,6 +18,8 @@
       </button>
       <button mat-raised-button color="primary" (click)="addNewObstacle()">Add obstacle
       </button>
+      <button mat-raised-button color="primary" (click)="addNewRestPoint()">Add rest point
+      </button>
       <button mat-raised-button color="warn" (click)="deleteRoad(road.id)">Delete road
       </button>
     </div>
@@ -54,6 +56,10 @@
 
       <div class="col-12 obstacles">
         <app-obstacle [obstacles]="road.obstacles" (obstacleRemoved)="reload()"></app-obstacle>
+      </div>
+
+      <div class="col-12">
+        <app-restpoint [restPoints]="road.restPoints"></app-restpoint>
       </div>
 
       <div *ngIf="shouldShowMap" class="col-12 map">

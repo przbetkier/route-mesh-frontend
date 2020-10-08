@@ -3,6 +3,7 @@ import {Road} from '../../../models/road-model';
 import {RoadsService} from '../../../services/roads.service';
 import {MatDialog} from '@angular/material';
 import {NewObstacleDialogComponent} from './obstacle/new-obstacle-dialog/new-obstacle-dialog.component';
+import {NewRestpointDialogComponent} from './restpoint/new-restpoint-dialog/new-restpoint-dialog.component';
 
 @Component({
   selector: 'app-single-road',
@@ -47,6 +48,19 @@ export class SingleRoadComponent implements OnInit {
 
   addNewObstacle() {
     this.dialog.open(NewObstacleDialogComponent, {
+      width: '60vw',
+      data: {roadId: this.road.id, roadName: this.road.name},
+      panelClass: 'custom-modalbox'
+    });
+    this.dialog.afterAllClosed.subscribe(
+      () => {
+        this.reload();
+      }
+    );
+  }
+
+  addNewRestPoint() {
+    this.dialog.open(NewRestpointDialogComponent, {
       width: '60vw',
       data: {roadId: this.road.id, roadName: this.road.name},
       panelClass: 'custom-modalbox'
