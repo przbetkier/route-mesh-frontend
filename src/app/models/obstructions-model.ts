@@ -1,7 +1,9 @@
 export class Obstructions {
   constructor(public height: HeightObstruction,
               public weight: WeightObstruction,
-              public width: WidthObstruction) {
+              public width: WidthObstruction,
+              public elevation: ElevationObstruction,
+              public curvature: CurvatureObstruction) {
   }
 }
 
@@ -25,5 +27,17 @@ export class WidthObstruction {
               public ranges: number[],
               public symmetric: boolean,
               public subtype: string) {
+  }
+}
+
+export class ElevationObstruction {
+  constructor(public verticalCurveRadius: number) {
+  }
+}
+
+export class CurvatureObstruction {
+  constructor(public innerRadius: number,
+              public outerRadius: number,
+              public boundaryRadius: number) {
   }
 }
