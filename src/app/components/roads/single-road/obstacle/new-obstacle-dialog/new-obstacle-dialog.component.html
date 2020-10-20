@@ -184,6 +184,46 @@
             </div>
           </div>
 
+          <!-- ELEVATION OBSTRUCTION PARAMS -->
+          <div *ngIf="elevationObstructionSelected()">
+            <h4>Elevation obstruction</h4>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" formControlName="elevationVerticalCurveRadius">
+                  <mat-placeholder>Vertical radius</mat-placeholder>
+                </mat-form-field>
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+
+          <!-- CURVATURE OBSTRUCTION PARAMS -->
+          <div *ngIf="curvatureObstructionSelected()">
+            <h4>Curvature obstruction</h4>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" formControlName="curvatureInnerRadius">
+                  <mat-placeholder>Inner radius</mat-placeholder>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" formControlName="curvatureOuterRadius">
+                  <mat-placeholder>Outer radius</mat-placeholder>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-form-field>
+                  <input matInput type="number" formControlName="curvatureBoundaryRadius">
+                  <mat-placeholder>Boundary radius</mat-placeholder>
+                </mat-form-field>
+              </div>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+
         </div>
         <!-- ACTION BUTTONS-->
         <div class="row">

@@ -53,6 +53,21 @@
             </p>
             <p matLine class="hint">Width limits are measured between road center and obstruction.</p>
             <p matLine class="hint">Negative values indicates that obstruction passed road centre.</p>
+            <mat-divider mat-line></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="obstacle.obstructions.elevation">
+            <div matSubheader>Elevation obstruction</div>
+            <p matLine>Vertical curve radius: {{obstacle.obstructions.elevation.verticalCurveRadius}}</p>
+            <mat-divider mat-line></mat-divider>
+          </mat-list-item>
+
+          <mat-list-item *ngIf="obstacle.obstructions.curvature">
+            <div matSubheader>Curvature obstruction</div>
+            <p matLine>Inner radius: {{obstacle.obstructions.curvature.innerRadius}}</p>
+            <p matLine>Outer radius: {{obstacle.obstructions.curvature.outerRadius}}</p>
+            <p matLine>Boundary radius: {{obstacle.obstructions.curvature.boundaryRadius}}</p>
+            <mat-divider mat-line></mat-divider>
           </mat-list-item>
 
         </mat-list>

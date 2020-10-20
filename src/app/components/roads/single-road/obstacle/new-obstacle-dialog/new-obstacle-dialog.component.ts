@@ -3,7 +3,14 @@ import {MAT_DIALOG_DATA, MatDialogRef, MatSnackBar} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {ObstacleRequest} from '../../../../../models/obstacle-request';
 import {ObstacleService} from '../../../../../services/obstacle.service';
-import {HeightObstruction, Obstructions, WeightObstruction, WidthObstruction} from '../../../../../models/obstructions-model';
+import {
+  CurvatureObstruction,
+  ElevationObstruction,
+  HeightObstruction,
+  Obstructions,
+  WeightObstruction,
+  WidthObstruction
+} from '../../../../../models/obstructions-model';
 import {isNullOrUndefined} from 'util';
 
 export interface NewObstacleDialogData {
@@ -21,7 +28,7 @@ export class NewObstacleDialogComponent {
     formGroup: FormGroup;
     roadId: number;
     roadName: string;
-    obstructionTypes = ['HEIGHT', 'WEIGHT', 'WIDTH'];
+    obstructionTypes = ['HEIGHT', 'WEIGHT', 'WIDTH', 'ELEVATION', 'CURVATURE'];
 
     heightObstacleProfiles = ['LINE', 'SEMICIRCLE', 'QUARTER_CIRCLE'];
     heightObstacleTypes = ['OVERPASS', 'TUNNEL', 'DEVICE', 'CABLES', 'PIPE', 'OTHER'];
@@ -56,13 +63,19 @@ export class NewObstacleDialogComponent {
             widthSubtype: new FormControl({value: '', disabled: true}, Validators.required),
             widthLimits: new FormControl({value: '', disabled: true}, Validators.required),
             widthRanges: new FormControl({value: '', disabled: true}, Validators.required),
-            widthSymmetric: new FormControl({value: '', disabled: true}, Validators.required)
+            widthSymmetric: new FormControl({value: '', disabled: true}, Validators.required),
+            elevationVerticalCurveRadius: new FormControl({value: '', disabled: true}, Validators.required),
+            curvatureInnerRadius: new FormControl({value: '', disabled: true}, Validators.required),
+            curvatureOuterRadius: new FormControl({value: '', disabled: true}, Validators.required),
+            curvatureBoundaryRadius: new FormControl({value: '', disabled: true}, Validators.required)
         });
         this.selectedObstructions.valueChanges.subscribe(val => {
             if (isNullOrUndefined(val) || val.length === 0) {
                 this.disableHeightForm();
                 this.disableWeightForm();
                 this.disableWidthForm();
+                this.disableElevationForm();
+                this.disableCurvatureForm();
             }
 
             if (val.includes('HEIGHT')) {
@@ -90,6 +103,20 @@ export class NewObstacleDialogComponent {
             } else {
                 this.disableWidthForm();
             }
+
+            if (val.includes('ELEVATION')) {
+              this.formGroup.get('elevationVerticalCurveRadius').enable();
+            } else {
+              this.disableElevationForm();
+            }
+
+            if (val.includes('CURVATURE')) {
+              this.formGroup.get('curvatureInnerRadius').enable();
+              this.formGroup.get('curvatureOuterRadius').enable();
+              this.formGroup.get('curvatureBoundaryRadius').enable();
+            } else {
+              this.disableCurvatureForm();
+            }
         });
     }
 
@@ -111,6 +138,16 @@ export class NewObstacleDialogComponent {
         this.formGroup.get('widthLimits').disable();
         this.formGroup.get('widthRanges').disable();
         this.formGroup.get('widthSymmetric').disable();
+    }
+
+    disableElevationForm() {
+        this.formGroup.get('elevationVerticalCurveRadius').disable();
+    }
+
+    disableCurvatureForm() {
+        this.formGroup.get('curvatureInnerRadius').disable();
+        this.formGroup.get('curvatureOuterRadius').disable();
+        this.formGroup.get('curvatureBoundaryRadius').disable();
     }
 
     isFormValid(): boolean {
@@ -193,6 +230,22 @@ export class NewObstacleDialogComponent {
         return this.formGroup.get('widthSubtype');
     }
 
+    get elevationVerticalCurveRadius() {
+        return this.formGroup.get('elevationVerticalCurveRadius');
+    }
+
+    get curvatureInnerRadius() {
+        return this.formGroup.get('curvatureInnerRadius');
+    }
+
+    get curvatureOuterRadius() {
+        return this.formGroup.get('curvatureOuterRadius');
+    }
+
+    get curvatureBoundaryRadius() {
+        return this.formGroup.get('curvatureBoundaryRadius');
+    }
+
     get obstructions(): string[] {
         return isNullOrUndefined(this.selectedObstructions.value) ? [] : this.selectedObstructions.value;
     }
@@ -224,6 +277,22 @@ export class NewObstacleDialogComponent {
             ) : null;
     }
 
+    getElevationObstruction(): ElevationObstruction {
+          return this.elevationObstructionSelected() ?
+              new ElevationObstruction(
+                this.elevationVerticalCurveRadius.value
+          ) : null;
+    }
+
+    getCurvatureObstruction(): CurvatureObstruction {
+          return this.curvatureObstructionSelected() ?
+            new CurvatureObstruction(
+              this.curvatureInnerRadius.value,
+              this.curvatureOuterRadius.value,
+              this.curvatureBoundaryRadius.value
+            ) : null;
+    }
+
     heightObstructionSelected(): boolean {
         return this.obstructions.includes('HEIGHT');
     }
@@ -236,10 +305,20 @@ export class NewObstacleDialogComponent {
         return this.obstructions.includes('WIDTH');
     }
 
+    elevationObstructionSelected(): boolean {
+        return this.obstructions.includes('ELEVATION');
+    }
+
+    curvatureObstructionSelected(): boolean {
+        return this.obstructions.includes('CURVATURE');
+    }
+
     addObstacle(formDirective: FormGroupDirective) {
         const heightObstruction = this.getHeightObstruction();
         const weightObstruction = this.getWeightObstruction();
         const widthObstruction = this.getWidthObstruction();
+        const elevationObstruction = this.getElevationObstruction();
+        const curvatureObstruction = this.getCurvatureObstruction();
         const request = new ObstacleRequest(
             this.roadId,
             this.name.value,
@@ -253,7 +332,9 @@ export class NewObstacleDialogComponent {
             new Obstructions(
                 heightObstruction,
                 weightObstruction,
-                widthObstruction
+                widthObstruction,
+                elevationObstruction,
+                curvatureObstruction
             )
         );
         this.obstacleService.addObstacle(request).subscribe(
