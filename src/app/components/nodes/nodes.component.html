@@ -16,6 +16,7 @@
               <div class="agm-window-content">
                 <div>Name: <strong>{{node.name}}</strong></div>
                 <div>Type: {{node.type}}</div>
+                <div>ID: {{node.id}}</div>
                 <div *ngIf="node.type === 'INTERSECTION'">
                   <button mat-button color="accent" (click)="createRoundabout(node.id)">Mark as roundabout</button>
                 </div>
