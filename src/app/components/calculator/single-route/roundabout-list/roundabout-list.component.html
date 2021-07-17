@@ -1,0 +1,15 @@
+<h5>Roundabouts to Remove</h5>
+<mat-list *ngIf="roundaboutList.length > 0">
+  <mat-list-item *ngFor="let ra of roundaboutList">
+    <img matListAvatar src="../../../../../assets/icons/roundabout.png" alt="roundabout">
+    <h3 matLine> {{ra.name}}</h3>
+    <p matLine>
+      <span>Removal cost: {{ra.removalCost}} zł</span>
+    </p>
+  </mat-list-item>
+</mat-list>
+<mat-list *ngIf="roundaboutList.length === 0 || !roundaboutList">
+  <mat-list-item>
+    <div>There are no roundabouts to remove.</div>
+  </mat-list-item>
+</mat-list>

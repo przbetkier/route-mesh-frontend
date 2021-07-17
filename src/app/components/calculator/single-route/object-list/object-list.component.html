@@ -1,0 +1,18 @@
+<h5>Objects to Remove</h5>
+<mat-list *ngIf="objectList.length > 0">
+  <mat-list-item *ngFor="let object of objectList">
+    <img matListAvatar src="../../../../../assets/icons/bridge.png" alt="object">
+    <h3 matLine> {{object.name}}</h3>
+    <p matLine>
+      <span>Milestone: {{object.milestone}}km</span>
+    </p>
+    <p matLine>
+      <span><app-road-list-number *ngFor="let number of object.number" [number]="number"></app-road-list-number></span>
+    </p>
+  </mat-list-item>
+</mat-list>
+<mat-list *ngIf="objectList.length === 0 || !objectList">
+  <mat-list-item>
+    <div>There are no objects to remove.</div>
+  </mat-list-item>
+</mat-list>

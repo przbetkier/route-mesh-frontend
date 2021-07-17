@@ -1,8 +1,13 @@
 <h5>Obstacles</h5>
 <mat-list *ngIf="obstacles.length > 0">
   <mat-list-item *ngFor="let obstacle of obstacles">
+    
     <mat-icon (click)=deleteObstacle(obstacle.id) color="warn" matListIcon [matTooltip]="'Delete obstacle'">delete</mat-icon>
+
     <img matListAvatar src="../../../../../assets/icons/obstacle.png" alt="obstacle">
+    <p matLine>
+      <span class="obstacle-id">{{obstacle.id}}</span>
+    </p>
     <h3 matLine> {{obstacle.name}} in city: {{obstacle.city}}</h3>
     <p matLine>
       <span>Obstruction(s) on milestone: {{obstacle.milestone}}km, geo: [{{obstacle.latitude}}, {{obstacle.longitude}}]</span>

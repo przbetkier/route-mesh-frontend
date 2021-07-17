@@ -1,0 +1,53 @@
+<h5>Rest Points</h5>
+<ng-container *ngIf="restpointList.length > 0">
+  <mat-list *ngFor="let restPoint of restpointList">
+    <mat-list-item *ngIf="restPoint != 'Shorter'">
+        <img matListAvatar src="../../../../../assets/icons/parking.png" alt="restPoint">
+        <h3 matLine> {{restPoint.name}}</h3>
+        <p matLine>
+          <span>Milestone: {{restPoint.milestone}}km</span>
+        </p>
+        <p matLine>
+          <span><app-road-list-number *ngFor="let number of restPoint.roadNumber" [number]="number"></app-road-list-number></span>
+        </p>
+        <p matLine>
+          <span>Slots: {{restPoint.generalSlots}}</span>
+        </p>
+        <p matLine>
+          <span>Occupancy: {{restPoint.occupancy}}</span>
+        </p>
+        <p matLine>
+          <span>Slot measurements: {{restPoint.slotLength}} x {{restPoint.slotWidth}}</span>
+        </p>
+        <p matLine>
+          <span>Hazardous slots: {{restPoint.hazardousSlots}}</span>
+        </p>
+        <p matLine>
+          <span>Space measurements: {{restPoint.oversizeLength}} x {{restPoint.oversizeWidth}}</span>
+        </p>
+        <p matLine>
+          <span>Security: {{restPoint.security}}</span>
+        </p>
+        <p matLine>
+          <span>CCTV: {{restPoint.cctv}}</span>
+        </p>
+        <p matLine>
+          <span>Barriers: {{restPoint.barriers}}</span>
+        </p>
+        <p matLine>
+          <span>Lighting: {{restPoint.lighting}}</span>
+        </p>   
+    </mat-list-item>
+    <mat-list-item *ngIf="restPoint === 'Shorter'">
+      <div>There are no restpoints needed.</div>
+  </mat-list-item>
+  </mat-list>
+</ng-container>
+<ng-container *ngIf="restpointList.length === 0">
+  <mat-list>
+    <mat-list-item>
+      <div>There are no restpoints needed.</div>
+    </mat-list-item>
+  </mat-list>
+</ng-container>
+

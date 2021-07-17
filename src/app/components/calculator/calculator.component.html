@@ -1,0 +1,179 @@
+<div class="container">
+<mat-card>
+  <h2>Calculate the best route</h2>
+  <img class = "image-full-width" src="../../../assets/schema_parameters.png" alt="">
+  <mat-card-content>
+    <div class="roads-form">
+      <form [formGroup]="formGroup" #formDirective="ngForm" (ngSubmit)="calculateRoute(formDirective)">
+        <div class="form-container">
+          <div class="row">
+            <div class="col-12">
+              <h5>General Inputs</h5>
+              <mat-divider></mat-divider>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Start" matInput formControlName="start" [matAutocomplete]="autocompleteStart">
+                <mat-autocomplete autoActiveFirstOption #autocompleteStart="matAutocomplete">
+                  <mat-option *ngFor="let node of filteredStartNodes | async" [value]="node.name">
+                    {{node.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field class="example-full-width">
+                <input type="text" placeholder="End" matInput formControlName="end" [matAutocomplete]="autocompleteEnd">
+                <mat-autocomplete autoActiveFirstOption #autocompleteEnd="matAutocomplete">
+                  <mat-option *ngFor="let node of filteredEndNodes | async" [value]="node.name">
+                    {{node.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput type="number" formControlName="maxCost" required>
+                <mat-placeholder>Maximum cost [zł]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="number" formControlName="daysToDepart" required>
+                <mat-placeholder>Days To Depart</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput type="number" formControlName="maxTime" required>
+                <mat-placeholder>Maximum Time Travel [min]</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <h5>Vehicle Inputs</h5>
+              <mat-divider></mat-divider>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input type="number" matInput formControlName="vLength" required>
+                <mat-placeholder>Vehicle Length (xt(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vHeight" required>
+                <mat-placeholder>Vehicle Height (ht(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vMlc" required>
+                <mat-placeholder>Vehicle MLC (mt(st))</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vClerance" required>
+                <mat-placeholder>Vehicle Clearance (pt(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vWidthRangeStart" required>
+                <mat-placeholder>Max Width Range Start (aₕᵣ(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vFirstAxle" required>
+                <mat-placeholder>Dist From Front To First Rear Axle (jt₁(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vWidthTop" required>
+                <mat-placeholder>Width of Vehicle Top (wₕᵣ(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vBolt" required>
+                <mat-placeholder>Dist From Front To Bolt (bt(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <select matNativeControl required formControlName="vValue" placeholder="Is it worth more than 150.000 euro?">
+                  <option value="{{true}}">Yes</option>
+                  <option value="{{false}}">No</option>
+                </select>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input type="number" matInput formControlName="vWidth" required>
+                <mat-placeholder>Vehicle Width (wt(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vSpacing" required>
+                <mat-placeholder>Vehicle Spacing (dt(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vLoad" required>
+                <mat-placeholder>Vehicle Load Per Axle (pt(st)) [kN]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vWidthRangeEnd" required>
+                <mat-placeholder>Max Width Range End (bₕᵣ(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vLastAxle" required>
+                <mat-placeholder>Dist From Front To Last Vehicle Axle (jtₙ(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vAngle" required>
+                <mat-placeholder>Max steering angle of last axle (αdt(st)) [deg]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input type="number" matInput formControlName="vTireWidth" required>
+                <mat-placeholder>Width of Vehicle Tire (ut(st)) [mm]</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <select matNativeControl required formControlName="vHazardous" placeholder="Is it hazardous cargo?">
+                  <option value="{{true}}">Yes</option>
+                  <option value="{{false}}">No</option>
+                </select>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <h5>Driving Time Params</h5>
+              <mat-divider></mat-divider>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput type="number" formControlName="vDrivers" required>
+                <mat-placeholder>Numbers of drivers</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="number" formControlName="singleDriveTime" required>
+                <mat-placeholder>Time of single driving</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field>
+                <input matInput type="number" formControlName="dailyDriveTime" required>
+                <mat-placeholder>Time of daily driving</mat-placeholder>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput type="number" formControlName="weeklyDriveTime" required>
+                <mat-placeholder>Time of weekly driving</mat-placeholder>
+              </mat-form-field>
+            </div>
+            <div class="col-12 button-section">
+              <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid() || processing">Calculate routes</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-spinner [diameter]="50" *ngIf="processing"></mat-spinner>
+<mat-card *ngIf="routes" class="routes-card">
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6"><h2>Routes ({{routes.length}})</h2></div>
+    </div>
+    <div class="route-list" *ngFor="let route of routes">
+      <app-single-route [route]="route"></app-single-route>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card *ngIf="!notExist">
+  <mat-card-content>
+    <h2>The route for your parameters is not exist!</h2>
+  </mat-card-content>
+</mat-card>
+</div>
