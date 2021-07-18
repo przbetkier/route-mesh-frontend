@@ -8,21 +8,24 @@
           <mat-radio-button value="ALL" (click)="changeType('ALL')">All</mat-radio-button>
           <mat-radio-button value="ROUNDABOUTS" (click)="changeType('ROUNDABOUT')">Roundabouts</mat-radio-button>
           <mat-radio-button value="INTERSECTION" (click)="changeType('INTERSECTION')">Intersections</mat-radio-button>
+          <mat-radio-button value="RESTPOINT" (click)="changeType('RESTPOINT')">Restpoints</mat-radio-button>
         </mat-radio-group>
 
-        <agm-map [latitude]="52.229676" [longitude]="21.012229">
-          <agm-marker *ngFor="let node of filteredNodes" [latitude]="node.latitude" [longitude]="node.longitude">
-            <agm-info-window>
-              <div class="agm-window-content">
-                <div>Name: <strong>{{node.name}}</strong></div>
-                <div>Type: {{node.type}}</div>
-                <div>ID: {{node.id}}</div>
-                <div *ngIf="node.type === 'INTERSECTION'">
-                  <button mat-button color="accent" (click)="createRoundabout(node.id)">Mark as roundabout</button>
+        <agm-map [latitude]="52.229676" [longitude]="21.012229" [styles] = "nodesTheme">
+            <agm-marker *ngFor="let node of filteredNodes" [latitude]="node.latitude" [longitude]="node.longitude" [iconUrl]="{ url: '../../../../assets/icons/full-moon.png', scaledSize: {height: 15, width: 15 }}">
+              <agm-info-window>
+                <div class="agm-window-content">
+                  <div>Name: <strong>{{node.name}}</strong></div>
+                  <div>Type: {{node.type}}</div>
+                  <div>ID: {{node.id}}</div>
+                  <div *ngIf="node.type === 'INTERSECTION'">
+                    <button mat-button color="accent" (click)="createRoundabout(node.id)">Mark as roundabout</button>
+                    <button mat-button color="accent" (click)="createRestpoint(node.id)">Mark as restpoint</button>
+                  </div>
+                 
                 </div>
-              </div>
-            </agm-info-window>
-          </agm-marker>
+              </agm-info-window>
+            </agm-marker>
         </agm-map>
       </div>
     </mat-card-content>

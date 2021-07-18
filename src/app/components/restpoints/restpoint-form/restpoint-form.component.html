@@ -1,0 +1,88 @@
+<div class="container">
+  <mat-card>
+    <h3>Create restpoint for node {{nodeId}}</h3>
+
+    <agm-map *ngIf="!isLoading" class="map" [latitude]="node.latitude" [longitude]="node.longitude" [zoom]="16">
+      <agm-marker [latitude]="node.latitude" [longitude]="node.longitude">
+      </agm-marker>
+    </agm-map>
+
+    <div *ngIf="node">
+      <h2>{{node.name}}</h2>
+
+      <form [formGroup]="formGroup" #formDirective="ngForm" (ngSubmit)="createRestpoint(formDirective)">
+        <mat-form-field>
+          <mat-label>Type</mat-label>
+          <select matNativeControl formControlName="restpointType" required>
+            <option *ngFor="let type of restpointTypes" value="{{type}}">{{type}}</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="string" matInput formControlName="roadNumber" required>
+          <mat-placeholder>roadNumber:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="milestone" required>
+          <mat-placeholder>Milestone:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="generalSlots" required>
+          <mat-placeholder>Slots:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="occupancy" required>
+          <mat-placeholder>Occupancy:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="slotLength" required>
+          <mat-placeholder>Slot Length:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="slotWidth" required>
+          <mat-placeholder>Slot Width:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="hazardousSlots" required>
+          <mat-placeholder>Slots for hazardous:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="oversizeLength" required>
+          <mat-placeholder>Space Length:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <input type="number" matInput formControlName="oversizeWidth" required>
+          <mat-placeholder>Space Width:</mat-placeholder>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Security:</mat-label>
+          <select matNativeControl required formControlName="security">
+            <option value="{{true}}">Yes</option>
+            <option value="{{false}}">No</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>CCTV:</mat-label>
+          <select matNativeControl required formControlName="cctv">
+            <option value="{{true}}">Yes</option>
+            <option value="{{false}}">No</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Barriers:</mat-label>
+          <select matNativeControl required formControlName="barriers">
+            <option value="{{true}}">Yes</option>
+            <option value="{{false}}">No</option>
+          </select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Lighting:</mat-label>
+          <select matNativeControl required formControlName="lighting">
+            <option value="{{true}}">Yes</option>
+            <option value="{{false}}">No</option>
+          </select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!isFormValid() || processing">Add restpoint</button>
+      </form>
+    </div>
+  </mat-card>
+</div>

@@ -142,3 +142,7 @@ mat-icon {
     text-align: center
   }
 }
+
+#calculator {
+  background-color: #3c3e44;
+}

@@ -1,0 +1,65 @@
+h2 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+mat-card {
+  margin-top: 32px;
+  background-color: rgba(114, 112, 105, 0.4);
+  padding: 2rem;
+  margin-bottom: 32px;
+}
+
+.calculate-form {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.form-container {
+  display: inline-block;
+}
+
+.form-container > * {
+  width: 100%;
+}
+
+.mat-divider-horizontal {
+  position: relative !important;
+}
+
+.route-list {
+  padding: 8px;
+}
+
+.routes-card {
+  margin-bottom: 32px;
+}
+
+.pagination {
+  padding: 8px;
+}
+
+mat-paginator {
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.button-section {
+  margin-top: 24px;
+}
+
+button {
+  width: 100%;
+}
+
+mat-spinner {
+  margin: 0 auto;
+}
+
+.image-full-width {
+  width: 100%;
+  margin-bottom: 20px;
+}

@@ -8,6 +8,9 @@ import {LoginComponent} from './components/login/login.component';
 import {RouteGuardService} from './services/route-guard.service';
 import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabout.component';
 import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
+import {RestpointComponent} from './components/restpoints/restpoint/restpoint.component';
+import {RestpointFormComponent} from './components/restpoints/restpoint-form/restpoint-form.component';
+import {CalculatorComponent} from './components/calculator/calculator.component';
 
 const routes: Routes =
   [
@@ -17,7 +20,10 @@ const routes: Routes =
     {path: 'nodes', component: NodesComponent, canActivate: [RouteGuardService]},
     {path: 'obstacles', component: ObstaclesComponent, canActivate: [RouteGuardService]},
     {path: 'roundabouts', component: RoundaboutComponent, canActivate: [RouteGuardService]},
+    {path: 'restpoints', component: RestpointComponent, canActivate: [RouteGuardService]},
     {path: 'roundabout-form/:nodeId', component: RoundaboutFormComponent, canActivate: [RouteGuardService]},
+    {path: 'restpoint-form/:nodeId', component: RestpointFormComponent, canActivate: [RouteGuardService]},
+    {path: 'calculator', component: CalculatorComponent, canActivate: [RouteGuardService]},
     {path: 'login', component: LoginComponent},
     {path: '**', redirectTo: '/'}
   ];

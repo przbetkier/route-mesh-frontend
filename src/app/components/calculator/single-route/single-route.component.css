@@ -1,0 +1,41 @@
+.mat-divider {
+  border-top-color: white;
+}
+
+.from-dest {
+  color: #24a2d6;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.mat-expansion-panel-header-description {
+  text-align: right;
+  display: block;
+}
+
+agm-map {
+  height: 600px;
+}
+
+.map {
+  margin-top: 2rem;
+}
+
+.mat-content {
+  display: block !important;
+  flex: 0;
+}
+
+.mat-expansion-panel-header-title {
+  display: block;
+  flex-grow: 2;
+}
+
+.buttons-row {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+button {
+  margin-right: 1rem;
+}

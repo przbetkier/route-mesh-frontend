@@ -6,7 +6,10 @@
       <agm-map [latitude]="52.22" [longitude]="21.01">
         <agm-marker *ngFor="let obstacle of obstacles" [latitude]="obstacle.latitude" [longitude]="obstacle.longitude">
           <agm-info-window>
-            {{obstacle.name}} at milestone: {{obstacle.milestone}}km
+            <div class="agm-window-content">
+              <div>ID: {{obstacle.id}}</div>
+              <div>Name: <strong>{{obstacle.name}}</strong> at milestone: {{obstacle.milestone}}km</div>
+            </div>
             <button mat-button color="accent" (click)="showObstacleDetails(obstacle.id)">Show more</button>
           </agm-info-window>
         </agm-marker>

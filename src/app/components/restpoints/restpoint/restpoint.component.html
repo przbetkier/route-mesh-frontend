@@ -1,0 +1,163 @@
+<div class="container">
+  <mat-card>
+    <mat-card-content>
+      <h2>Restpoints ({{restpoints.length}}):</h2>
+      <div *ngIf="loading">
+        <mat-spinner></mat-spinner>
+      </div>
+      <div *ngIf="!loading">
+
+        <div class="map">
+          <agm-map [latitude]="52.229676" [longitude]="21.012229" [zoom]="9" [styles] = "customTheme">
+            <ng-container *ngFor="let restpoint of restpoints">
+                <agm-marker *ngIf="(restpoint.security && restpoint.cctv) && (restpoint.barriers || restpoint.lighting)" [latitude]="restpoint.node.latitude" [longitude]="restpoint.node.longitude" [iconUrl]="{ url: '../../../../assets/icons/full.png', scaledSize: {height: restpoint.generalSlots / 2 + 20, width: restpoint.generalSlots / 2 + 20 }}">
+                  <agm-info-window>
+                    <p>{{restpoint.node.name}}</p>
+                    <p>ID: {{restpoint.id}}</p>
+                    <p>Type: {{restpoint.restpointType}}</p>
+                    <p>Road Number: {{restpoint.roadNumber}}</p>
+                    <p>Milestone: {{restpoint.milestone}}</p>
+                    <p>Slots: {{restpoint.generalSlots}}</p>
+                    <p>Occupancy: {{restpoint.occupancy}}</p>
+                    <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                    <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                    <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                    <p>Security: {{restpoint.security}}</p>
+                    <p>CCTV: {{restpoint.cctv}}</p>
+                    <p>Barriers: {{restpoint.barriers}}</p>
+                    <p>Lighting: {{restpoint.lighting}}</p>
+                  </agm-info-window>
+                </agm-marker>            
+            <agm-marker *ngIf="!restpoint.security && !restpoint.cctv && !restpoint.barriers && !restpoint.lighting" [latitude]="restpoint.node.latitude" [longitude]="restpoint.node.longitude" [iconUrl]="{ url: '../../../../assets/icons/0.png', scaledSize: {height: restpoint.generalSlots / 2 + 20, width: restpoint.generalSlots / 2 + 20 }}">
+              <agm-info-window>
+                <p>{{restpoint.node.name}}</p>
+                <p>ID: {{restpoint.id}}</p>
+                <p>Type: {{restpoint.restpointType}}</p>
+                <p>Road Number: {{restpoint.roadNumber}}</p>
+                <p>Milestone: {{restpoint.milestone}}</p>
+                <p>Slots: {{restpoint.generalSlots}}</p>
+                <p>Occupancy: {{restpoint.occupancy}}</p>
+                <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                <p>Security: {{restpoint.security}}</p>
+                <p>CCTV: {{restpoint.cctv}}</p>
+                <p>Barriers: {{restpoint.barriers}}</p>
+                <p>Lighting: {{restpoint.lighting}}</p>
+              </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngIf="((restpoint.security || restpoint.cctv) && (!restpoint.barriers && !restpoint.lighting)) || (!restpoint.security && !restpoint.cctv && restpoint.barriers && restpoint.lighting)" [latitude]="restpoint.node.latitude" [longitude]="restpoint.node.longitude" [iconUrl]="{ url: '../../../../assets/icons/1_2.png', scaledSize: {height: restpoint.generalSlots / 2  + 20, width: restpoint.generalSlots / 2 + 20 }}">
+              <agm-info-window>
+                <p>{{restpoint.node.name}}</p>
+                <p>ID: {{restpoint.id}}</p>
+                <p>Type: {{restpoint.restpointType}}</p>
+                <p>Road Number: {{restpoint.roadNumber}}</p>
+                <p>Milestone: {{restpoint.milestone}}</p>
+                <p>Slots: {{restpoint.generalSlots}}</p>
+                <p>Occupancy: {{restpoint.occupancy}}</p>
+                <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                <p>Security: {{restpoint.security}}</p>
+                <p>CCTV: {{restpoint.cctv}}</p>
+                <p>Barriers: {{restpoint.barriers}}</p>
+                <p>Lighting: {{restpoint.lighting}}</p>
+              </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngIf="((!restpoint.security && restpoint.cctv) && (restpoint.barriers || restpoint.lighting)) || (restpoint.security && !restpoint.cctv && (restpoint.barriers || restpoint.lighting)) || (restpoint.security && restpoint.cctv && !restpoint.barriers && !restpoint.lighting)" [latitude]="restpoint.node.latitude" [longitude]="restpoint.node.longitude" [iconUrl]="{ url: '../../../../assets/icons/3_4.png', scaledSize: {height: restpoint.generalSlots / 2 + 20, width: restpoint.generalSlots / 2 + 20 }}">
+              <agm-info-window>
+                <p>{{restpoint.node.name}}</p>
+                <p>ID: {{restpoint.id}}</p>
+                <p>Type: {{restpoint.restpointType}}</p>
+                <p>Road Number: {{restpoint.roadNumber}}</p>
+                <p>Milestone: {{restpoint.milestone}}</p>
+                <p>Slots: {{restpoint.generalSlots}}</p>
+                <p>Occupancy: {{restpoint.occupancy}}</p>
+                <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                <p>Security: {{restpoint.security}}</p>
+                <p>CCTV: {{restpoint.cctv}}</p>
+                <p>Barriers: {{restpoint.barriers}}</p>
+                <p>Lighting: {{restpoint.lighting}}</p>
+              </agm-info-window>
+            </agm-marker>
+            <agm-marker *ngIf="(!restpoint.security && !restpoint.cctv && restpoint.barriers && !restpoint.lighting) || (!restpoint.security && !restpoint.cctv && !restpoint.barriers && restpoint.lighting)" [latitude]="restpoint.node.latitude" [longitude]="restpoint.node.longitude" [iconUrl]="{ url: '../../../../assets/icons/1_4.png', scaledSize: {height: restpoint.generalSlots / 2 + 20, width: restpoint.generalSlots / 2 + 20 }}">
+              <agm-info-window>
+                <p>{{restpoint.node.name}}</p>
+                <p>ID: {{restpoint.id}}</p>
+                <p>Type: {{restpoint.restpointType}}</p>
+                <p>Road Number: {{restpoint.roadNumber}}</p>
+                <p>Milestone: {{restpoint.milestone}}</p>
+                <p>Slots: {{restpoint.generalSlots}}</p>
+                <p>Occupancy: {{restpoint.occupancy}}</p>
+                <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                <p>Security: {{restpoint.security}}</p>
+                <p>CCTV: {{restpoint.cctv}}</p>
+                <p>Barriers: {{restpoint.barriers}}</p>
+                <p>Lighting: {{restpoint.lighting}}</p>
+              </agm-info-window>
+            </agm-marker>
+            </ng-container>
+          </agm-map>
+        </div>
+        <mat-accordion>
+          <div *ngFor="let restpoint of restpoints">
+            <mat-expansion-panel>
+              <mat-expansion-panel-header [collapsedHeight]="'80px'" [expandedHeight]="'80px'">
+                <mat-panel-title>
+                  {{restpoint.node.name}}
+                </mat-panel-title>
+                <mat-panel-description>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12">
+                    <p>Type: {{restpoint.restpointType}}</p>
+                    <p>Road Number: {{restpoint.roadNumber}}</p>
+                    <p>Milestone: {{restpoint.milestone}}</p>
+                    <p>Slots: {{restpoint.generalSlots}}</p>
+                    <p>Occupancy: {{restpoint.occupancy}}</p>
+                    <p>Slot measurements: {{restpoint.slotLength}} x {{restpoint.slotWidth}}</p>
+                    <p>Hazardous slots: {{restpoint.hazardousSlots}}</p>
+                    <p>Space measurements: {{restpoint.oversizeLength}} x {{restpoint.oversizeWidth}}</p>
+                    <p>Security: {{restpoint.security}}</p>
+                    <p>CCTV: {{restpoint.cctv}}</p>
+                    <p>Barriers: {{restpoint.barriers}}</p>
+                    <p>Lighting: {{restpoint.lighting}}</p>
+                  </div>
+                </div>
+                <agm-map *ngIf="shouldShowRestpointMap(restpoint.id)"
+                         [latitude]="restpoint.node.latitude"
+                         [longitude]="restpoint.node.longitude"
+                         [zoom]="17">
+                  <agm-marker [latitude]="restpoint.node.latitude"
+                              [longitude]="restpoint.node.longitude">
+                  </agm-marker>
+                </agm-map>
+
+
+                <div class="row buttons">
+                  <div class="col-12">
+                    <button mat-raised-button color="primary" (click)="toggle(restpoint.id)">
+                      <span *ngIf="shouldShowRestpointMap(restpoint.id)">Hide</span>
+                      <span *ngIf="!shouldShowRestpointMap(restpoint.id)">Show</span>
+                      map
+                    </button>
+                
+                    <button mat-raised-button color="warn" (click)="deleteRestpoint(restpoint.id)">Delete restpoint</button>
+               
+                  </div>
+                </div>
+              </div>
+
+            </mat-expansion-panel>
+          </div>
+        </mat-accordion>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

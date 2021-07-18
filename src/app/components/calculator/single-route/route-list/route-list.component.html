@@ -1,0 +1,19 @@
+<h5>Route</h5>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Length</th>
+      <th>Numbers</th>
+      <th>Traffic Factor</th>
+      <th>Type</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let route of routeList">
+        <td>{{route.name}}</td>
+        <td>{{route.length}}</td>
+        <td><app-road-list-number *ngFor="let number of route.number" [number]="number"></app-road-list-number></td>
+        <td>{{route.trafficFactor}}</td>
+        <td>{{route.type}}</td>
+      </tr>
+    </tbody>
+  </table>

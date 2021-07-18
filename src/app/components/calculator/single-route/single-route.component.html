@@ -1,0 +1,78 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header [collapsedHeight]="'125px'" [expandedHeight]="'125px'">
+      <mat-panel-title>
+        <h6>{{route.name}}</h6>
+        From <span class="from-dest">{{route.startPoint}}</span> to <span class="from-dest">{{route.endPoint}}</span><br>
+        Cost <span class="from-dest">{{route.cost}} zł</span><br>
+        Time of travel <span class="from-dest">{{route.timeTravel}} min</span><br>
+        Length <span class="from-dest">{{route.length}} km</span><br>
+        Traffic Factor <span class="from-dest">{{route.trafficFactor}}</span>
+        Weather Index <span class="from-dest">{{route.weatherIndex}}</span>
+        Safety Index <span class="from-dest">{{route.safetyIndex}}</span>
+      </mat-panel-title>
+      <mat-panel-description>
+
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="buttons-row">
+      <button mat-raised-button color="accent" (click)="changeShouldShowMap()">
+        <span *ngIf="shouldShowMap">Hide map</span>
+        <span *ngIf="!shouldShowMap">Show map</span>
+      </button>
+    </div>
+
+    <div class="row">
+      <div class="col-12 road-rows">
+        <app-route-list [routeList]="route.roadRows"></app-route-list>
+      </div>
+      <div class="col-12">
+        <app-restpoint-list [restpointList]="route.restpoints"></app-restpoint-list>
+      </div>
+      <div class="col-12">
+        <app-object-list [objectList]="route.impassableObjects"></app-object-list>
+      </div>
+      <div class="col-12">
+        <app-weather-list [weatherList]="route.weather"></app-weather-list>
+      </div>
+      <div class="col-12">
+        <app-roundabout-list [roundaboutList]="route.impassableRoundabouts"></app-roundabout-list>
+      </div>
+        <div *ngIf="shouldShowMap" class="col-12 map">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker *ngFor="let rest of route.restpoints" [latitude]="rest.latitude" [longitude]="rest.longitude" [iconUrl]="restIcon">
+              <agm-info-window *ngIf="rest != null">
+                <p>{{rest.name}}</p>
+                <p>Milestone: {{rest.milestone}}</p>
+              </agm-info-window>
+          </agm-marker>
+          <agm-marker *ngFor="let object of route.impassableObjects" [latitude]="object.latitude" [longitude]="object.longitude" [iconUrl]="objectIcon">
+            <agm-info-window>
+              <p>{{object.name}}</p>
+              <p>Milestone: {{object.milestone}}</p>
+            </agm-info-window>
+        </agm-marker>
+        <agm-marker *ngFor="let roundabout of route.impassableRoundabouts" [latitude]="roundabout.latitude" [longitude]="roundabout.longitude" [iconUrl]="objectIcon">
+          <agm-info-window>
+            <p>{{roundabout.name}}</p>
+            <p>Removal cost: {{roundabout.removalCost}}</p>
+          </agm-info-window>
+      </agm-marker>
+          <ng-container *ngFor="let weather of route.weather">
+            <agm-marker *ngIf="weather.isBad == true && route.length > 5" [latitude]="weather.midLatitude" [longitude]="weather.midLongitude" [iconUrl]="weatherIcon">
+              <agm-info-window>
+              <p>Możliwe oblodzenia</p>
+              <p>Droga numer: {{weather.number}}</p>
+              <p>Pomiędzy pikietażem: {{weather.kmRange}}</p>
+          </agm-info-window>
+        </agm-marker>
+          </ng-container>
+          <agm-direction *ngFor="let road of rows" [origin]="{lat: road.lat1, lng: road.lon1}" [destination]="{lat: road.lat2, lng: road.lon2}" [renderOptions]="renderOptions" [markerOptions]="nodeOptions">
+          </agm-direction>
+        </agm-map>
+      </div>
+      
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

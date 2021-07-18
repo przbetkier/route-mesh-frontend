@@ -45,10 +45,18 @@ import {ObstaclesComponent} from './components/obstacles/obstacles.component';
 import {LoginComponent} from './components/login/login.component';
 import {authInterceptorProviders} from './helpers/auth.interceptor';
 import {RouteGuardService} from './services/route-guard.service';
+import {RestpointComponent} from './components/restpoints/restpoint/restpoint.component';
+import {RestpointFormComponent} from './components/restpoints/restpoint-form/restpoint-form.component';
 import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabout.component';
 import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
-import { RestpointComponent } from './components/roads/single-road/restpoint/restpoint.component';
-import { NewRestpointDialogComponent } from './components/roads/single-road/restpoint/new-restpoint-dialog/new-restpoint-dialog.component';
+import {CalculatorComponent} from './components/calculator/calculator.component';
+import {SingleRouteComponent} from './components/calculator/single-route/single-route.component';
+import {RouteListComponent} from './components/calculator/single-route/route-list/route-list.component';
+import {RestpointListComponent} from './components/calculator/single-route/restpoint-list/restpoint-list.component';
+import {RoadListNumberComponent} from './components/calculator/single-route/road-list-number/road-list-number.component';
+import {ObjectListComponent} from './components/calculator/single-route/object-list/object-list.component';
+import {WeatherListComponent} from './components/calculator/single-route/weather-list/weather-list.component';
+import {RoundaboutListComponent} from './components/calculator/single-route/roundabout-list/roundabout-list.component';
 
 @NgModule({
   declarations: [
@@ -66,8 +74,16 @@ import { NewRestpointDialogComponent } from './components/roads/single-road/rest
     LoginComponent,
     RoundaboutComponent,
     RoundaboutFormComponent,
+    CalculatorComponent,
+    SingleRouteComponent,
+    RouteListComponent,
+    RestpointListComponent,
+    RoadListNumberComponent,
+    ObjectListComponent,
+    WeatherListComponent,
+    RoundaboutListComponent,
     RestpointComponent,
-    NewRestpointDialogComponent
+    RestpointFormComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -104,7 +120,7 @@ import { NewRestpointDialogComponent } from './components/roads/single-road/rest
   ],
   providers: [authInterceptorProviders, RouteGuardService],
   bootstrap: [AppComponent],
-  entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent, NewRestpointDialogComponent]
+  entryComponents: [NewObstacleDialogComponent, ObstacleDetailsComponent]
 })
 export class AppModule {
 }
