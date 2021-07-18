@@ -49,14 +49,14 @@ import {RestpointComponent} from './components/restpoints/restpoint/restpoint.co
 import {RestpointFormComponent} from './components/restpoints/restpoint-form/restpoint-form.component';
 import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabout.component';
 import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
-import { CalculatorComponent } from './components/calculator/calculator.component';
-import { SingleRouteComponent } from './components/calculator/single-route/single-route.component';
-import { RouteListComponent } from './components/calculator/single-route/route-list/route-list.component';
-import { RestpointListComponent } from './components/calculator/single-route/restpoint-list/restpoint-list.component';
-import { RoadListNumberComponent } from './components/calculator/single-route/road-list-number/road-list-number.component';
-import { ObjectListComponent } from './components/calculator/single-route/object-list/object-list.component';
-import { WeatherListComponent } from './components/calculator/single-route/weather-list/weather-list.component';
-import { RoundaboutListComponent } from './components/calculator/single-route/roundabout-list/roundabout-list.component';
+import {CalculatorComponent} from './components/calculator/calculator.component';
+import {SingleRouteComponent} from './components/calculator/single-route/single-route.component';
+import {RouteListComponent} from './components/calculator/single-route/route-list/route-list.component';
+import {RestpointListComponent} from './components/calculator/single-route/restpoint-list/restpoint-list.component';
+import {RoadListNumberComponent} from './components/calculator/single-route/road-list-number/road-list-number.component';
+import {ObjectListComponent} from './components/calculator/single-route/object-list/object-list.component';
+import {WeatherListComponent} from './components/calculator/single-route/weather-list/weather-list.component';
+import {RoundaboutListComponent} from './components/calculator/single-route/roundabout-list/roundabout-list.component';
 
 @NgModule({
   declarations: [

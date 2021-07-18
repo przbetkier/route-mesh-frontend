@@ -10,7 +10,7 @@ import {RoundaboutComponent} from './components/roundabouts/roundabout/roundabou
 import {RoundaboutFormComponent} from './components/roundabouts/roundabout-form/roundabout-form.component';
 import {RestpointComponent} from './components/restpoints/restpoint/restpoint.component';
 import {RestpointFormComponent} from './components/restpoints/restpoint-form/restpoint-form.component';
-import { CalculatorComponent } from './components/calculator/calculator.component';
+import {CalculatorComponent} from './components/calculator/calculator.component';
 
 const routes: Routes =
   [
