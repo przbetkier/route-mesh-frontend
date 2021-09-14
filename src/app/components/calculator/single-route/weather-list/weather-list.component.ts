@@ -7,7 +7,7 @@ import {WeatherCords} from '../../../../models/route-model';
   styleUrls: ['./weather-list.component.css']
 })
 export class WeatherListComponent implements OnInit {
-  @Input() weatherList: WeatherCords;
+  @Input() weatherList: WeatherCords[];
 
   constructor() { }
 

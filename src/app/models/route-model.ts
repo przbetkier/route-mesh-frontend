@@ -1,17 +1,12 @@
-import { NumberValueAccessor } from "@angular/forms/src/directives";
-
-export class Routes {
-  constructor(public routes: Route[]) {
-  }
-}
 
 export interface Route {
+  name: string;
   cost: number;
+  restpoints: Restpoint[];
   length: number;
   startPoint: string;
   endPoint: string;
   roadRows: RoadFromRoute[];
-  stops: Restpoint[];
   impassableObjects: ImpassableObject[];
   impassableRoundabouts: ImpassableRoundabout[];
   weather: WeatherCords[];

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators} from '@angular/forms';
 import {Node} from '../../models/node-model';
 import {NodeService} from '../../services/node.service';
@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {PageEvent} from '@angular/material';
 import {RouteRequest} from '../../models/route-request';
-import {Routes} from '../../models/route-model';
+import {Route} from '../../models/route-model';
 
 
 @Component({
@@ -24,7 +24,7 @@ export class CalculatorComponent implements OnInit {
   selectedAdmins = new FormControl();
   loading = false;
   nodes: Node[] = [];
-  routes: Routes;
+  routes: Route[];
   filteredStartNodes: Observable<Node[]>;
   filteredEndNodes: Observable<Node[]>;
   query = '';
@@ -271,7 +271,10 @@ export class CalculatorComponent implements OnInit {
   }
 
   private _filter(value: string): Node[] {
-    const filterValue = value.toLowerCase();
+    let filterValue = '';
+    if (value !== null && value !== undefined) {
+      filterValue = value.toLowerCase();
+    }
     return this.nodes.filter(node => node.name.toLowerCase().indexOf(filterValue) >= 0);
   }
 }

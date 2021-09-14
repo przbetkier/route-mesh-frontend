@@ -7,7 +7,7 @@ import {ImpassableObject} from '../../../../models/route-model';
   styleUrls: ['./object-list.component.css']
 })
 export class ObjectListComponent implements OnInit {
-  @Input() objectList: ImpassableObject;
+  @Input() objectList: ImpassableObject[];
 
   constructor() { }
 

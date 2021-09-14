@@ -7,7 +7,7 @@ import {Restpoint} from '../../../../models/route-model';
   styleUrls: ['./restpoint-list.component.css']
 })
 export class RestpointListComponent implements OnInit {
-  @Input() restpointList: Restpoint;
+  @Input() restpointList: Restpoint[];
 
   constructor() { }
 

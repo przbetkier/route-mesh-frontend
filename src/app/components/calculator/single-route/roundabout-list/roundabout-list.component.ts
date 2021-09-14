@@ -7,7 +7,7 @@ import {ImpassableRoundabout} from '../../../../models/route-model';
   styleUrls: ['./roundabout-list.component.css']
 })
 export class RoundaboutListComponent implements OnInit {
-  @Input() roundaboutList: ImpassableRoundabout;
+  @Input() roundaboutList: ImpassableRoundabout[];
 
   constructor() { }
 
